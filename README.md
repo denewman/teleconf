@@ -1,10 +1,10 @@
 # teleconf
 
 Introduction:
-	This is the API for pushing/removing model driven telemetry configuration on Cisco IOS XR router
+	This is the API for pushing/removing telemetry configuration on Cisco IOS XR router
 	
 Files:
-	model/mdtconf.py	The actual API  
+	model/mdtconf.py	The actual API for model driven telemetry configuration  
 	model/sample_mdt.py	This is the sample client code showing how to call the API 
 
 API specification:
