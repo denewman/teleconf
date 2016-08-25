@@ -1,18 +1,23 @@
 '''
 Backend function to configure telemetry (MDT) on Cisco router
-Still working in progress
+Version: 1.1
+Change history:
+	v1.0	2016-08-24	YS	Created first version
+	v1.1	2016-08-25	YS	Enhanced exception handling
 '''
 from ydk.providers import NetconfServiceProvider
 from ydk.services import CRUDService 
 import ydk.models.openconfig.openconfig_telemetry as oc_telemetry 
 from ydk.services import CRUDService
+from ncclient.transport.errors import AuthenticationError,SSHError
 
 class Mdtconf(object):
 	OUTPUT = {
 		0: 'Operation success!',
-		1: 'Wrong user name/password',
-		2: 'Unable to connect to router',
-		3: 'Configuration failed',
+		1: 'Authentication fail',
+		2: 'SSH fail,could not open socket to router',
+		3: 'Unable to connect to router',
+		4: 'Configuration failed',
 		11: 'Unable to delete configuration'
 		}
 	def __init__(self, RouterId,Username,Password,RouterPort,
@@ -53,51 +58,62 @@ class Mdtconf(object):
 
 	
 	def access_router(self):
+		xr = 0
+		returncode = 0
 		
-		xr = NetconfServiceProvider(
-			address = self.RouterId,
-			port = self.RouterPort,
-			username = self.Username,
-			password = self.Password,
-			protocol = self.AccessProtocol)
-		return xr
-		'''
-		print "test access router "+self.RouterId
-		return "finish"
-		'''
+		try:
+			xr = NetconfServiceProvider(
+				address = self.RouterId,
+				port = self.RouterPort,
+				username = self.Username,
+				password = self.Password,
+				protocol = self.AccessProtocol)
+		except AuthenticationError:
+			returncode = 1
+		except SSHError:
+			returncode = 2
+		except:
+			returncode = 3	
+		
+		return xr,returncode
+		
 	def push_conf(self):
 		returncode = 0
-		xr = self.access_router()
+		xr,returncode = self.access_router()
+		if returncode > 0:
+			print "\n"+self.OUTPUT.get(returncode)+"\n"
+			return returncode
+		try:
+			sgroup = oc_telemetry.TelemetrySystem.SensorGroups.SensorGroup()
+			sgroup.sensor_group_id = self.SGroupName
+			sgroup.config.sensor_group_id = self.SGroupName
+			sgroup.sensor_paths = sgroup.SensorPaths()
+			new_sensorpath = sgroup.SensorPaths.SensorPath()
+			new_sensorpath.path = self.SPath
+			new_sensorpath.config.path = self.SPath
 		
-		sgroup = oc_telemetry.TelemetrySystem.SensorGroups.SensorGroup()
-		sgroup.sensor_group_id = self.SGroupName
-		sgroup.config.sensor_group_id = self.SGroupName
-		sgroup.sensor_paths = sgroup.SensorPaths()
-		new_sensorpath = sgroup.SensorPaths.SensorPath()
-		new_sensorpath.path = self.SPath
-		new_sensorpath.config.path = self.SPath
+			sgroup.sensor_paths.sensor_path.append(new_sensorpath)
 		
-		sgroup.sensor_paths.sensor_path.append(new_sensorpath)
+			rpc_service = CRUDService()
+			rpc_service.create(xr, sgroup)
+			sub = oc_telemetry.TelemetrySystem.Subscriptions.Persistent.Subscription()
+			sub.subscription_id = long(self.SubId)
+			sub.config.subscription_id = long(self.SubId)
 		
-		rpc_service = CRUDService()
-		rpc_service.create(xr, sgroup)
-		sub = oc_telemetry.TelemetrySystem.Subscriptions.Persistent.Subscription()
-		sub.subscription_id = long(self.SubId)
-		sub.config.subscription_id = long(self.SubId)
-		
-		sub.sensor_profiles = sub.SensorProfiles()
-		new_sgroup = sub.SensorProfiles.SensorProfile()
-		new_sgroup.sensor_group = self.SGroupName
-		new_sgroup.config.sensor_group = self.SGroupName
-		new_sgroup.config.sample_interval = long(self.Interval)
+			sub.sensor_profiles = sub.SensorProfiles()
+			new_sgroup = sub.SensorProfiles.SensorProfile()
+			new_sgroup.sensor_group = self.SGroupName
+			new_sgroup.config.sensor_group = self.SGroupName
+			new_sgroup.config.sample_interval = long(self.Interval)
 
-		sub.sensor_profiles.sensor_profile.append(new_sgroup)
+			sub.sensor_profiles.sensor_profile.append(new_sgroup)
 	
-		rpc_service.create(xr, sub)
-
+			rpc_service.create(xr, sub)
+		except:
+			returncode = 4
 		xr.close()
-		
-		print self.OUTPUT.get(returncode)
+	
+		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
 		
 	def del_conf(self):
