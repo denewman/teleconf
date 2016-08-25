@@ -1,7 +1,10 @@
 # teleconf
 
+Introduction:
+	This is the API for pushing/removing model driven telemetry configuration on Cisco IOS XR router
+	
 Files:
-	model/mdtconf.py	This is the API for pushing the model driven telemetry configuration to the router
+	model/mdtconf.py	The actual API  
 	model/sample_mdt.py	This is the sample client code showing how to call the API 
 
 API specification:
@@ -41,4 +44,3 @@ Example of using "sample_mdt.py" to call the API
 		python sample_mdt.py 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 		"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 		Sub1 4 3000
-		
