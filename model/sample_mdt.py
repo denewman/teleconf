@@ -1,5 +1,5 @@
 '''
-This is the sample code showing how to use the API to push telemetry configure to the router
+This is the sample client code showing how to call the API to push telemetry configure to the router
 Follow the bellow syntax to run this sample code:
 
 python sample_mdt.py [router ip] [user name] [password] [RouterPort] [access protocol] \
