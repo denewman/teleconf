@@ -13,7 +13,7 @@ python sample_mdt.py push 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30
 Sub1 4 3000
 
 Deleting configuration:
-python sample_mdt.py push 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+python sample_mdt.py delete 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 "Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 Sub1 4 3000
 '''
