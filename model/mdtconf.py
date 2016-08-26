@@ -4,6 +4,7 @@ Version: 1.1
 Change history:
 	v1.0	2016-08-24	YS	Created first version
 	v1.1	2016-08-25	YS	Enhanced exception handling
+	v1.2   	2016-08-26  AA  Added MDT confgiuration deleting function
 '''
 from ydk.providers import NetconfServiceProvider
 from ydk.services import CRUDService 
@@ -76,7 +77,9 @@ class Mdtconf(object):
 			returncode = 3	
 		
 		return xr,returncode
-		
+	
+	
+				
 	def push_conf(self):
 		returncode = 0
 		xr,returncode = self.access_router()
@@ -117,12 +120,27 @@ class Mdtconf(object):
 		return returncode
 		
 	def del_conf(self):
-		returncode = 0
-		xr = self.access_router()
+		# returncode = 0
+		# xr = self.access_router()
 		'''
 		TODO: 
 			develop the function for deleting the MDT confgiuration
 		'''
+		returncode = 0
+		xr,returncode = self.access_router()
+
+		if returncode > 0:
+			print "\n"+self.OUTPUT.get(returncode)+"\n"
+			return returncode
+
+		try:
+			rpc_service = CRUDService()
+			rpc_service.delete(xr, oc_telemetry.TelemetrySystem())
+		except:
+			returncode = 11
+		xr.close()
+
+		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
 		
 	

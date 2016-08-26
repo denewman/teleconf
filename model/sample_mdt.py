@@ -16,25 +16,33 @@ from mdtconf import Mdtconf
 import sys
 
 def main(argv):
-	RouterId = argv[1]
-	Username = argv[2]
-	Password = argv[3]
-	RouterPort = argv[4]
-	AccessProtocol = argv[5]
-	DgroupName = argv[6]
-	AddFamily = argv[7]
-	DestIp = argv[8]
-	RmtPort = argv[9]
-	SGroupName = argv[10]
-	SPath = argv[11]
-	SubName = argv[12]
-	SubId =argv[13]
-	Interval = argv[14]
+
+	ConfigType = argv[1]
+	RouterId = argv[2]
+	Username = argv[3]
+	Password = argv[4]
+	RouterPort = argv[5]
+	AccessProtocol = argv[6]
+	DgroupName = argv[7]
+	AddFamily = argv[8]
+	DestIp = argv[9]
+	RmtPort = argv[10]
+	SGroupName = argv[11]
+	SPath = argv[12]
+	SubName = argv[13]
+	SubId =argv[14]
+	Interval = argv[15]
+	
 	
 	conf = Mdtconf(RouterId,Username,Password,RouterPort,
 		AccessProtocol,DgroupName,AddFamily,DestIp,RmtPort,SGroupName,
 		SPath,SubName,SubId,Interval)
-	result = conf.push_conf()
+	
+	if ConfigType == "push":
+		result = conf.push_conf()
+	elif ConfigType == "delete":
+		result = conf.del_conf()
+	
 if __name__ == '__main__':
     # Connect to the db.
 	main(sys.argv)
