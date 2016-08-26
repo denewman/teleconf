@@ -120,12 +120,7 @@ class Mdtconf(object):
 		return returncode
 		
 	def del_conf(self):
-		# returncode = 0
-		# xr = self.access_router()
-		'''
-		TODO: 
-			develop the function for deleting the MDT confgiuration
-		'''
+
 		returncode = 0
 		xr,returncode = self.access_router()
 
