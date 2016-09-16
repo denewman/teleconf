@@ -6,10 +6,10 @@ Introduction:
 	
 Files:
 
-	model/mdtconf.py	The actual API for model driven telemetry configuration (MDT API))
-	model/pdtconf.py	The actual API for policy driven telemetry configuration (PDT API)
-	model/sample_mdt.py	This is the sample client code showing how to call the MDT API (via YANG/Netconf)
-	model/call_pdtconf.py This is the sample client code showing how to call the PDT API (via SSH/SCP) 
+	model/mdtconf.py	The actual API for model driven telemetry configuration (MDT API,via YANG/Netconf)
+	model/pdtconf.py	The actual API for policy driven telemetry configuration (PDT API, via Paramiko SSH/SCP)
+	model/sample_mdt.py	This is the sample client code showing how to call the MDT API 
+	model/call_pdtconf.py This is the sample client code showing how to call the PDT API
 
 MDT API specification:
 
