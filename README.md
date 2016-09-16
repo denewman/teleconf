@@ -10,6 +10,7 @@ Files:
 	model/pdtconf.py	The actual API for policy driven telemetry configuration (PDT API, via Paramiko SSH/SCP)
 	model/sample_mdt.py	This is the sample client code showing how to call the MDT API 
 	model/call_pdtconf.py This is the sample client code showing how to call the PDT API
+	model/mdtconf_ext.py An extention of MDT API, this will be integrated with MDT API in future
 
 MDT API specification:
 
@@ -99,3 +100,27 @@ Sample code of calling PDT API
 	
 	##delete configure##
 	result = conf.del_conf()
+
+
+MDT API extention code: model/mdtconf_ext.py
+
+	This configuration is an extension of MDT API. 
+	This code is a Configuring Model-Driven Telemetry (MDT) with OpenConfig
+	YANG OpenConfig YANG that uses a netconf client. 
+	This configuration extends the capability of MDT API for supporting
+	multi path within the same subscription group.
+	
+	The extension API takes six arguments.
+        1 - RouterId (Router IP address)
+        2 - Username (Router username)
+        3 - password (Router Password)
+        4 - RouterPort (Router Port number)
+        5 - SGroupName (Subscription group name)
+        6 - SPath (Subscription path)
+
+
+	To run the script:
+        python mdtconf_ext.py RouterId Username password RouterPort SGroupName SPath
+
+	Ex.:
+        python mdtconf_ext.py 192.168.2.3 vagrant vagrant 22 SGroup4 CiscoWorld:arp/nodes/node/entries/entry
