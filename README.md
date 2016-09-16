@@ -134,28 +134,28 @@ Example of using "call_pdtconf.py" to call PDT API
 		--u=USERNAME          mandatory,user name to access the router
 		--p=PASSWORD          mandatory,password to access the router
 		--pn=POLICYNAME       mandatory,policy name, this value will also been used
-				      as the policy file name.
-				      eg: if the poilcy name is 'Test', the policy file name
-                                      will then be 'Test.json'
+				              as the policy file name.
+				              eg: if the poilcy name is 'Test', the policy file name
+                              will then be 'Test.json'
 		--pp=PATHS            mandatory,paths used by the policy.
-				      eg: RootOper.InfraStatistics.Interface(*).Latest.GenericCounters
+				              eg: RootOper.InfraStatistics.Interface(*).Latest.GenericCounters
 		--dst=DESTIP          mandatory,IP address of the telemetry receiving host
 		--pg=POLICYGROUPNAME  mandatory,the name of the policy group
 		--c=CONFTYPE          optional,Configuration type, either 'push' or
-				      'delete',default is 'push'
+				              'delete',default is 'push'
 		--rp=ROUTERPORT       optional,the TCP port which is used for remote
-				      access to router, default is 22
+				              access to router, default is 22
 		--m=ACCESSPROTOCOL    optional,access protocol, telnet or ssh, default is
-				      ssh
+				              ssh
 		--pv=POLICYVERSION    optional,policy version, default value is 1
 		--pd=DESCRIPTION      optional,policy description, default value is empty
 		--pc=COMMENT          optional,policy comment,default value is empty
 		--pi=IDENTIFIER       optional,policy identifier, default value is empty
 		--pe=PERIOD           optional,policy period, in seconds, default value is 30
 		--af=ADDFAMILY        optional,address family, either ipv4 or ipv6, default
-				      value is ipv4
+				              value is ipv4
 		--dp=RMTPORT          optional,TCP/UDP port of the tetelemery receiving
-			 	      host, default is 2103
+			 	              host, default is 2103
 	
 	eg:
 	python call_pdtconf.py --n=64.104.255.10 --rp=5000 --u=vagrant --p=vagrant --pn=Test --pp="aa,bb,cc"\
