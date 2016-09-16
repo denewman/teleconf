@@ -10,6 +10,7 @@ Files:
 	model/call_pdtconf.py This is the sample client code showing how to call the PDT API (via SSH/SCP) 
 
 MDT API specification:
+
 	Input variables:
 		1: RouteId: Router's ip address or name which is accessible via SSH/Telnet
 		2: Username: user name for accessing the router
@@ -50,6 +51,7 @@ Sample code of calling MDT API
 	
 
 PDT API specification (via Paramiko SSH/SCP):
+
 	Input variables:
 		1: ConfType: either 'push' or 'delete'
 		2: RouterId: Router's ip address or name which is accessible via SSH/Telnet
