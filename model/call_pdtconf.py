@@ -148,6 +148,7 @@ def main(argv):
 		DestIp == "":
 		print "\n"+"Missing mandatory arguements"+"\n"
 		parser.print_help()
+		sys.exit()
 	
 	conf = Pdtconf(ConfType,RouterId,Username,Password,RouterPort,
 			AccessProtocol,PolicyName,PolicyVersion,Description,Comment,Identifier,
