@@ -43,7 +43,7 @@ class Pdtconf(object):
 			6, AccessProtocol: ssh or telnet 
 			7, PolicyName: the name of the policy, as well as the policy file name (JSON file)
 							eg: if the poilcy name is 'Test', the policy file name will
-							then be 'Test.json'
+							then be 'Test.policy'
 			8, PolicyVersion: the value of 'Version' in policy
 			9, Description: descriptoin of the policy, use " " to represent no description
 			10,Comment: comment of the policy,us " " to represent no comment
