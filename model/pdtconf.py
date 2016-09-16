@@ -26,6 +26,7 @@ class Pdtconf(object):
 		9: 'Unable to move files between directories on router',
 		11: 'Unable to delete configuration'
 		}
+	TMPDIR = "/tmp"
 	HOMEDIR1 = "/disk0:"
 	HOMEDIR2 = "/disk0\:"
 	TELEDIR = "/telemetry/policies"
@@ -123,7 +124,7 @@ class Pdtconf(object):
 		'''
 		Create json object and file contains the policy configuration 
 		'''
-		json_file = self.PolicyName+".policy"
+		json_file = self.TMPDIR+"/"+self.PolicyName+".policy"
 		print "\n"+"creating json object......"+"\n"
 		data = {"Name":self.PolicyName,
 				"Metadata": {
