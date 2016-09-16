@@ -125,6 +125,7 @@ class Pdtconf(object):
 		Create json object and file contains the policy configuration 
 		'''
 		json_file = self.TMPDIR+"/"+self.PolicyName+".policy"
+		json_file_name = self.PolicyName+".policy"
 		print "\n"+"creating json object......"+"\n"
 		data = {"Name":self.PolicyName,
 				"Metadata": {
@@ -157,9 +158,9 @@ class Pdtconf(object):
 			print "\n"+self.OUTPUT.get(returncode)+"\n"
 			return returncode
 
-		remotefile1 = self.HOMEDIR1+"/"+json_file
-		remotefile2 = self.HOMEDIR2+"/"+json_file
-		remotefile3 = self.TELEDIR+"/"+json_file
+		remotefile1 = self.HOMEDIR1+"/"+json_file_name
+		remotefile2 = self.HOMEDIR2+"/"+json_file_name
+		remotefile3 = self.TELEDIR+"/"+json_file_name
 		copycmd = "cp "+remotefile2+" "+self.TELEDIR+"/.\r\n"
 		delcmd = "rm "+remotefile2+"\r\n"		
 		try:
