@@ -63,8 +63,8 @@ PDT API specification:
 		5: RouterPort: the TCP port of the router which is used for remote access, eg: 22, 830 etc
 		6: AccessProtocol: ssh or telnet 
 		7: PolicyName: the name of the policy, as well as the policy file name (JSON file)
-					eg: if the poilcy name is 'Test', the policy file name will
-					then be 'Test.json'
+		   eg: if the poilcy name is 'Test', the policy file name will
+	           then be 'Test.json'
 		8: PolicyVersion: the value of 'Version' in policy
 		9: Description: descriptoin of the policy, use " " to represent no description
 		10:Comment: comment of the policy,us " " to represent no comment
@@ -101,6 +101,65 @@ Sample code of calling PDT API
 	##delete configure##
 	result = conf.del_conf()
 
+
+Example of using "sample_mdt.py" to call MDT API
+
+	syntax of running "sample_mdt.py":
+		python sample_mdt.py [ConfigType] [router ip] [user name] [password] [RouterPort] [access protocol] \
+		[destination group name] [address family] [destination ip] [remote port] \
+		[sensor group name] [sensor path] [subscription name] [subscription ID] [interval]
+		
+	eg:
+		For pushing configuration to the router:
+
+		python sample_mdt.py push  192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+		"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+		Sub1 4 3000
+
+		For deleting configuration from the router:
+		
+		python sample_mdt.py delete  192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+		"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+		Sub1 4 3000
+
+Example of using "call_pdtconf.py" to call PDT API
+	
+	Sytax of running "call_pdtconf.py":
+	
+	Usage: call_pdtconf.py [options]
+
+	Options:
+		-h, --help            show this help message and exit
+		--n=ROUTERID          mandatory,router ip or name which is accessable
+		--u=USERNAME          mandatory,user name to access the router
+		--p=PASSWORD          mandatory,password to access the router
+		--pn=POLICYNAME       mandatory,policy name, this value will also been used
+				      as the policy file name.
+				      eg: if the poilcy name is 'Test', the policy file name
+                                      will then be 'Test.json'
+		--pp=PATHS            mandatory,paths used by the policy.
+				      eg: RootOper.InfraStatistics.Interface(*).Latest.GenericCounters
+		--dst=DESTIP          mandatory,IP address of the telemetry receiving host
+		--pg=POLICYGROUPNAME  mandatory,the name of the policy group
+		--c=CONFTYPE          optional,Configuration type, either 'push' or
+				      'delete',default is 'push'
+		--rp=ROUTERPORT       optional,the TCP port which is used for remote
+				      access to router, default is 22
+		--m=ACCESSPROTOCOL    optional,access protocol, telnet or ssh, default is
+				      ssh
+		--pv=POLICYVERSION    optional,policy version, default value is 1
+		--pd=DESCRIPTION      optional,policy description, default value is empty
+		--pc=COMMENT          optional,policy comment,default value is empty
+		--pi=IDENTIFIER       optional,policy identifier, default value is empty
+		--pe=PERIOD           optional,policy period, in seconds, default value is 30
+		--af=ADDFAMILY        optional,address family, either ipv4 or ipv6, default
+				      value is ipv4
+		--dp=RMTPORT          optional,TCP/UDP port of the tetelemery receiving
+			 	      host, default is 2103
+	
+	eg:
+	python call_pdtconf.py --n=64.104.255.10 --rp=5000 --u=vagrant --p=vagrant --pn=Test --pp="aa,bb,cc"\
+	--dst=172.32.1.1 --pg=testgroup12
 
 MDT API extention code: model/mdtconf_ext.py
 
