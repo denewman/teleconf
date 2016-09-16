@@ -53,7 +53,7 @@ Sample code of calling MDT API
 	result = conf.del_conf()
 	
 
-PDT API specification (via Paramiko SSH/SCP):
+PDT API specification:
 
 	Input variables:
 		1: ConfType: either 'push' or 'delete'
