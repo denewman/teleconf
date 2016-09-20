@@ -37,7 +37,7 @@ Options:
                       default is 2103
 
 Example:
-		python call_pdt.py --n=192.168.2.2 --u=vagrant --p=vagrant\
+		python call_pdtconf.py --n=192.168.2.2 --u=vagrant --p=vagrant\
 		--pn=Test --pp="RootOper.InfraStatistics.Interface(*).Latest.GenericCounters"\ 
 		--dst=172.32.1.1
 '''
