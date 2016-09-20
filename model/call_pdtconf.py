@@ -21,6 +21,7 @@ Options:
                       eg: RootOper.InfraStatistics.Interface(*).Latest.Generic
                       Counters
   --dst=DESTIP        IP address of the telemetry receiving host
+  --pg=POLICYGROUPNAME  mandatory,the name of the policy group
   --c=CONFTYPE        optional,Configuration type, either 'push' or 'del',
                       default is 'push'
   --rp=ROUTERPORT     optional,the TCP port which is used for remote
@@ -39,7 +40,7 @@ Options:
 Example:
 		python call_pdtconf.py --n=192.168.2.2 --u=vagrant --p=vagrant\
 		--pn=Test --pp="RootOper.InfraStatistics.Interface(*).Latest.GenericCounters"\ 
-		--dst=172.32.1.1
+		--dst=172.32.1.1 --pg=group1
 '''
 
 
