@@ -9,10 +9,12 @@ Files:
 
 	Model Driven Telemery (MDT)
 		API via Yang/Netconf          
-			model/mdtconf.py
-			model/mdtconf_ext.py (extension 1)
-			model/sample_mdt.py (sample client code)
-											
+			model/mdtconf_ext.py (extension 1)	
+		
+		API via YDK
+			model/mdtconf_ydk.py
+			model/call_mdtconf_ydk.py (sample client code)
+			
 		API via SSH (Netmiko)      
 			model/mdtconf_ssh.py (extension 2)
 			
@@ -49,9 +51,9 @@ MDT API specification:
 		4: Configuration failed, eg: router refuses to take the configuration due to invalid values
 		11: Unable to delete configuration
 
-Sample code of calling MDT API
+Sample code of calling MDT API (YDK)
 
-	from mdtconf import Mdtconf
+	from mdtconf_ydk import Mdtconf
 	conf = Mdtconf(RouterId,Username,Password,RouterPort,
 		AccessProtocol,DgroupName,AddFamily,DestIp,RmtPort,SGroupName,
 		SPath,SubName,SubId,Interval)
@@ -99,7 +101,7 @@ PDT API specification:
 		9: Unable to move files between directories on router
 		11:Unable to delete configuration
 		
-Sample code of calling PDT API
+Sample code of calling PDT API (SSH/SCP)
 	
 	from pdtconf import Pdtconf
 	conf = Pdtconf(ConfType,RouterId,Username,Password,RouterPort,
@@ -112,25 +114,22 @@ Sample code of calling PDT API
 	result = conf.del_conf()
 
 
-Example of using "sample_mdt.py" to call MDT API
+Example of using "call_mdtconf_ydk.py" to call MDT API (YDK)
 
-	syntax of running "sample_mdt.py":
-		python sample_mdt.py [ConfigType] [router ip] [user name] [password] [RouterPort] [access protocol] \
+	python call_mdtconf_ydk.py [ConfigType] [router ip] [user name] [password] [RouterPort] [access protocol] \
 		[destination group name] [address family] [destination ip] [remote port] \
 		[sensor group name] [sensor path] [subscription name] [subscription ID] [interval]
 		
 	eg:
-		For pushing configuration to the router:
+	Pushing configuration
+	python call_mdtconf_ydk.py push 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
 
-		python sample_mdt.py push  192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
-		"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
-		Sub1 4 3000
-
-		For deleting configuration from the router:
-		
-		python sample_mdt.py delete  192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
-		"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
-		Sub1 4 3000
+	Deleting configuration:
+	python call_mdtconf_ydk.py delete 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
 
 Example of using "call_pdtconf.py" to call PDT API
 	
