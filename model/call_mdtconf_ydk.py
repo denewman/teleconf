@@ -2,23 +2,23 @@
 This is the sample client code showing how to call the API to push telemetry configure to the router
 Follow the bellow syntax to run this sample code:
 
-python sample_mdt.py [ConfigType] [router ip] [user name] [password] [RouterPort] [access protocol] \
+python call_mdtconf_ydk.py [ConfigType] [router ip] [user name] [password] [RouterPort] [access protocol] \
 		[destination group name] [address family] [destination ip] [remote port] \
 		[sensor group name] [sensor path] [subscription name] [subscription ID] [interval]
 		
 eg:
 Pushing configuration
-python sample_mdt.py push 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+python call_mdtconf_ydk.py push 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 "Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 Sub1 4 3000
 
 Deleting configuration:
-python sample_mdt.py delete 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+python call_mdtconf_ydk.py delete 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 "Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 Sub1 4 3000
 '''
 
-from mdtconf import Mdtconf
+from mdtconf_ydk import Mdtconf
 import sys
 
 def main(argv):
