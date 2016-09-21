@@ -175,6 +175,7 @@ class Pdtconf(object):
 		print "closing and re-openning ssh session......"+"\n"
 		scp.close
 		ssh.close
+		time.sleep(3)
 		ssh,scp,returncode = self.access_router()
 		if returncode > 0:
 			print "\n"+self.OUTPUT.get(returncode)+"\n"
