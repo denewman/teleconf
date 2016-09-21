@@ -4,7 +4,6 @@ Introduction:
 
 	This is the API for pushing/removing telemetry configuration on Cisco IOS XR router
 	
-	
 Files:
 
 	Model Driven Telemery (MDT)
