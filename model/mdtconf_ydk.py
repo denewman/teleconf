@@ -1,10 +1,11 @@
 '''
 Backend function to configure telemetry (MDT) on Cisco router via YDK
-Version: 1.1
+Version: 1.3
 Change history:
 	v1.0	2016-08-24	YS	Created first version
 	v1.1	2016-08-25	YS	Enhanced exception handling
 	v1.2   	2016-08-26  AA  Added MDT confgiuration deleting function
+	v1.3	2016-09-25	YS	Support multiple sensors
 '''
 from ydk.providers import NetconfServiceProvider
 from ydk.services import CRUDService 
@@ -38,6 +39,7 @@ class Mdtconf(object):
 			10,SGroupName: Sensor group name
 			11,SPath: sensor path, eg: 
 				Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+			   If there are multiple paths, please use ',' (comma) to seperate them
 			12,SubName: subscription name
 			13,SubId: subscripton ID
 			14,Interval: interval of pushing telemetry data, in ms, eg: 30000
@@ -90,12 +92,15 @@ class Mdtconf(object):
 			sgroup = oc_telemetry.TelemetrySystem.SensorGroups.SensorGroup()
 			sgroup.sensor_group_id = self.SGroupName
 			sgroup.config.sensor_group_id = self.SGroupName
-			sgroup.sensor_paths = sgroup.SensorPaths()
-			new_sensorpath = sgroup.SensorPaths.SensorPath()
-			new_sensorpath.path = self.SPath
-			new_sensorpath.config.path = self.SPath
-		
-			sgroup.sensor_paths.sensor_path.append(new_sensorpath)
+			sgroup.sensor_paths = sgroup.SensorPaths()		
+			
+			split = ","
+			PathList = self.SPath.split(split)
+			for path in PathList:
+				new_sensorpath = sgroup.SensorPaths.SensorPath()
+				new_sensorpath.path = path
+				new_sensorpath.config.path = path
+				sgroup.sensor_paths.sensor_path.append(new_sensorpath)
 		
 			rpc_service = CRUDService()
 			rpc_service.create(xr, sgroup)
@@ -112,6 +117,12 @@ class Mdtconf(object):
 			sub.sensor_profiles.sensor_profile.append(new_sgroup)
 	
 			rpc_service.create(xr, sub)
+			'''
+			TODO: configure destination group
+			dgroup = oc_telemetry.TelemetrySystem.DestinationGroups.DestinationGroup()
+			dgroup.group_id = self.DgroupName
+			dgroup.config.group_id = self.DgroupName
+			'''
 		except:
 			returncode = 4
 		xr.close()
