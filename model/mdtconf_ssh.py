@@ -1,161 +1,206 @@
-#!/usr/bin/python
-
 from netmiko import ConnectHandler
+from netmiko.ssh_exception import NetMikoTimeoutException, NetMikoAuthenticationException
 import sys
 
-#arguments
-#python mdtssh.py  newConfig  192.168.2.3 vagrant vagrant 22 Dgroup1 172.16.18.5 5001 SGroup1 sgroup1/ciscorouter/com Sub1 3000
-def configureAll(argv,cisco_xrv):
 
-    # RouterId = argv[1]
-    # Username = argv[2]
-    # Password = argv[3]
-    # RouterPort = argv[4]
-    DgroupName = argv[6]
-    DIPAddress = argv[7]
-    DgroupPort = argv[8]
-    SenorGroupName = argv[9]
-    SensorPath = argv[10]
-    SubName = argv[11]
-    interval = argv[12]
+class Mdtconf(object):
 
-    net_connect = ConnectHandler(**cisco_xrv)
+    OUTPUT = {
+		0: 'Operation success!',
+		1: 'Authentication fail',
+		2: 'SSH fail,could not open socket to router',
+		3: 'Unable to connect to router',
+		4: 'Configuration failed',
+		11: 'Unable to delete configuration'
+		}
 
+    def __init__(self, RouterId,Username,Password,RouterPort,
+    AccessProtocol,DgroupName,AddFamily,DestIp,RmtPort,SGroupName,
+    SPath,SubName,SubId,Interval):
+    # '''
+    # Input variables:
+    #     1, RouteId: Router's ip address or name which is accessible via SSH/Telnet
+    #     2, Username: user name for accessing the router
+    #     3, Password: password for accessing the router
+    #     4, RouterPort: the TCP port of the router which is used for remote access, eg: 22, 830 etc
+    #     5, AccessProtocol: ssh or telnet
+    #     6, DgroupName: destination group name
+    #     7, AddFamily: address family, either ipv4 or ipv6
+    #     8, DestIp: IP address of the telemetry receiving host
+    #     9, RmtPort: TCP/UDP port of the retelemery receiving host, eg: 5432
+    #     10,SGroupName: Sensor group name
+    #     11,SPath: sensor path, eg:
+    #         Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+    #     12,SubName: subscription name
+    #     13,SubId: subscripton ID
+    #     14,Interval: interval of pushing telemetry data, in ms, eg: 30000
+    # '''
+        self.RouterId = RouterId
+        self.Username = Username
+        self.Password = Password
+        self.RouterPort = RouterPort
+        self.AccessProtocol = AccessProtocol
+        self.DgroupName = DgroupName
+        self.AddFamily = AddFamily
+        self.DestIp = DestIp
+        self.RmtPort = RmtPort
+        self.SGroupName = SGroupName
+        self.SPath = SPath
+        self.SubName = SubName
+        self.SubId = SubId
+        self.Interval = Interval
 
-    # Create a destination-group
-    create_destination_group = [ 'telemetry model-driven',
-                        'destination-group ' + DgroupName,
-                        'address family ipv4 '+ DIPAddress +' port ' + DgroupPort,
-                        'encoding self-describing-gpb',
-                        'protocol tcp',
-                        'commit' ]
+    def access_router(self):
 
-    output = net_connect.send_config_set(create_destination_group)
-    #print(output)
+        xr = 0
+        returncode = 0
+        try:
+            xr = {
+                'device_type': 'cisco_xr',
+                'ip':  self.RouterId ,
+                'username': self.Username,
+                'password': self.Password,
+                'port' : self.RouterPort,          # optional, defaults to 22
+                'secret': '',     # optional, defaults to ''
+                'verbose': False,       # optional, defaults to False
+            }
 
-    #  Create a sensor-group
+            xr = ConnectHandler(**xr)
+        except NetMikoAuthenticationException:
+               returncode = 1
+        except SSHException:
+               returncode = 2
+        except:
+               returncode = 3
 
-    create_sensor_group = [ 'telemetry model-driven',
-                        'sensor-group ' + SenorGroupName,
-                        'sensor-path  '+ SensorPath ,
-                        'commit' ]
-
-    output = net_connect.send_config_set(create_sensor_group)
-    # print(output)
-
-    # Create a subscription
-
-    create_subscription = [ 'telemetry model-driven',
-                        'subscription ' + SubName,
-                        'sensor-group-id '+ SenorGroupName +' sample-interval ' + interval,
-                        'destination-id ' + DgroupName,
-                        'commit' ]
-
-    output = net_connect.send_config_set(create_subscription)
-    #print(output)
-
-
-    output = net_connect.send_command('show running-config telemetry model-driven')
-    #print(output)
-
-#python mdtssh.py  subscription  192.168.2.3 vagrant vagrant 22 Dgroup1 Sub2  SGroup1  3000
-
-def subscription(argv,cisco_xrv):
-
-    DgroupName = argv[6]
-    SubName = argv[7]
-    SenorGroupName = argv[8]
-    interval = argv[9]
-
-
-
-    net_connect = ConnectHandler(**cisco_xrv)
-
-
-    create_subscription = [ 'telemetry model-driven',
-                        'subscription ' + SubName,
-                        'sensor-group-id '+ SenorGroupName +' sample-interval ' + interval,
-                        'destination-id ' + DgroupName,
-                        'commit' ]
-
-    output = net_connect.send_config_set(create_subscription)
-    # print(output)
+        return xr,returncode
 
 
-    output = net_connect.send_command('show running-config telemetry model-driven')
-    #print(output)
+    def configureAll(self):
+
+       returncode = 0
+       xr , returncode = self.access_router()
+
+       try:
+           create_destination_group = [ 'telemetry model-driven',
+           'destination-group ' + self.DgroupName,
+           'address family '+ self.AddFamily +" "+ self.DestIp +' port ' + self.RmtPort,
+           'encoding self-describing-gpb',
+           'protocol tcp',
+           'commit' ]
+
+           output = xr.send_config_set(create_destination_group)
+        #    print(output)
+
+           create_sensor_group = [ 'telemetry model-driven',
+                               'sensor-group ' + self.SGroupName,
+                               'sensor-path  '+ self.SPath ,
+                               'commit' ]
+
+           output = xr.send_config_set(create_sensor_group)
+        #    print(output)
+
+           # Create a subscription
+
+           create_subscription = [ 'telemetry model-driven',
+                               'subscription ' + self.SubName + self.SubId,
+                               'sensor-group-id '+ self.SGroupName +' sample-interval ' + self.Interval,
+                               'destination-id ' + self.DgroupName,
+                               'commit' ]
+
+           output = xr.send_config_set(create_subscription)
+        #    print(output)
 
 
-#python mdtssh.py  destination  192.168.2.3 vagrant vagrant 22 Dgroup2 192.168.4.3  7872
+        #    output = xr.send_command('show running-config telemetry model-driven')
+        #    print(output)
 
-def destination(argv,cisco_xrv):
+       except:
+           returncode = 4
 
-    DgroupName = argv[6]
-    DIPAddress = argv[7]
-    DgroupPort = argv[8]
-
-
-    net_connect = ConnectHandler(**cisco_xrv)
+       print "\n"+self.OUTPUT.get(returncode)+"\n"
+       return returncode
 
 
-    create_destination_group = [ 'telemetry model-driven',
-                        'destination-group ' + DgroupName,
-                        'address family ipv4 '+ DIPAddress +' port ' + DgroupPort,
-                        'encoding self-describing-gpb',
-                        'protocol tcp',
-                        'commit' ]
-
-    output = net_connect.send_config_set(create_destination_group)
-    # print(output)
 
 
-    output = net_connect.send_command('show running-config telemetry model-driven')
-    #print(output)
+    def destination(self):
 
-# python mdtssh.py  sensor  192.168.2.3 vagrant vagrant 22 SGroup2 Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+        returncode = 0
+        xr,returncode = self.access_router()
 
-def sensor(argv,cisco_xrv):
+        try:
 
-    SenorGroupName = argv[6]
-    SensorPath = argv[7]
-    net_connect = ConnectHandler(**cisco_xrv)
+           create_destination_group = [ 'telemetry model-driven',
+               'destination-group ' + self.DgroupName,
+               'address family '+ self.AddFamily +" "+ self.DestIp +' port ' + self.RmtPort,
+               'encoding self-describing-gpb',
+               'protocol tcp',
+               'commit' ]
 
-
-    create_sensor_group = [ 'telemetry model-driven',
-                        'sensor-group ' + SenorGroupName,
-                        'sensor-path  '+ SensorPath ,
-                        'commit' ]
-
-    output = net_connect.send_config_set(create_sensor_group)
-    # print(output)
+           output = xr.send_config_set(create_destination_group)
+        #    print(output)
 
 
-    output = net_connect.send_command('show running-config telemetry model-driven')
-    #print(output)
 
-if __name__=='__main__':
 
-    Command = sys.argv[1]
-    RouterId = sys.argv[2]
-    Username = sys.argv[3]
-    Password = sys.argv[4]
-    RouterPort = sys.argv[5]
+        except:
+           returncode = 4
 
-    cisco_xrv = {
-        'device_type': 'cisco_xr',
-        'ip':  RouterId ,
-        'username': Username,
-        'password': Password,
-        'port' : RouterPort,          # optional, defaults to 22
-        'secret': '',     # optional, defaults to ''
-        'verbose': False,       # optional, defaults to False
-    }
+        print "\n"+self.OUTPUT.get(returncode)+"\n"
+        return returncode
 
-    if Command =='subscription':
-        subscription(sys.argv, cisco_xrv)
-    elif Command =='destination':
-        destination(sys.argv, cisco_xrv)
-    elif Command =='sensor':
-        sensor(sys.argv, cisco_xrv)
-    elif Command =='newConfig':
-        configureAll(sys.argv, cisco_xrv)
+
+
+
+
+    def subscription(self):
+
+        returncode = 0
+        xr,returncode = self.access_router()
+
+        try:
+
+            create_subscription = [ 'telemetry model-driven',
+                                'subscription ' + self.SubName + self.SubId,
+                                'sensor-group-id '+ self.SGroupName +' sample-interval ' + self.Interval,
+                                'destination-id ' + self.DgroupName,
+                                'commit' ]
+
+
+            output = xr.send_config_set(create_subscription)
+            # print(output)
+
+
+
+
+        except:
+            returncode = 4
+
+        print "\n"+self.OUTPUT.get(returncode)+"\n"
+        return returncode
+
+
+    def sensor(self):
+
+        returncode = 0
+        xr,returncode = self.access_router()
+
+        try:
+
+           create_sensor_group = [ 'telemetry model-driven',
+                               'sensor-group ' + self.SGroupName,
+                               'sensor-path  '+ self.SPath ,
+                               'commit' ]
+
+           output = xr.send_config_set(create_sensor_group)
+        #    print(output)
+
+
+
+
+        except:
+           returncode = 4
+
+        print "\n"+self.OUTPUT.get(returncode)+"\n"
+        return returncode
