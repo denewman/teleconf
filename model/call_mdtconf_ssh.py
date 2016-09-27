@@ -30,7 +30,7 @@ Sub1 4 3000
 
 
 import sys
-from mdtconf_ssh import Mdtconf
+from mdtconf_ssh import MdtSSHconf
 
 
 def main(argv):
@@ -51,7 +51,7 @@ def main(argv):
     SubId =argv[14]
     Interval = argv[15]
 
-    conf = Mdtconf(RouterId,Username,Password,RouterPort,
+    conf = MdtSSHconf(RouterId,Username,Password,RouterPort,
 		AccessProtocol,DgroupName,AddFamily,DestIp,RmtPort,SGroupName,
 		SPath,SubName,SubId,Interval)
 

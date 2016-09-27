@@ -3,7 +3,7 @@ from netmiko.ssh_exception import NetMikoTimeoutException, NetMikoAuthentication
 import sys
 
 
-class Mdtconf(object):
+class MdtSSHconf(object):
 
     OUTPUT = {
 		0: 'Operation success!',
