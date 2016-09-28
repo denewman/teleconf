@@ -39,6 +39,7 @@ class MdtSSHconf(object):
     #     10,SGroupName: Sensor group name
     #     11,SPath: sensor path, eg:
     #         Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+	#		If there are multiple paths, please use ',' (comma) to seperate them
     #     12,SubName: subscription name
     #     13,SubId: subscripton ID
     #     14,Interval: interval of pushing telemetry data, in ms, eg: 30000
