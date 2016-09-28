@@ -106,7 +106,6 @@ class MdtSSHconf(object):
                                'sensor-group ' + self.SGroupName ]
 	   for path in PathList:
 		create_sensor_group.append('sensor-path '+ path)
-		print "path is "+path
 		
 	   create_sensor_group.append('commit')
 
