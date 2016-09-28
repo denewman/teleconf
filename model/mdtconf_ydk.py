@@ -6,6 +6,7 @@ Change history:
 	v1.1	2016-08-25	YS	Enhanced exception handling
 	v1.2   	2016-08-26  AA  Added MDT confgiuration deleting function
 	v1.3	2016-09-25	YS	Support multiple sensors
+	v1.4	2016-09-28	YS	Added Destination group configure
 '''
 from ydk.providers import NetconfServiceProvider
 from ydk.services import CRUDService 
@@ -117,12 +118,22 @@ class Mdtconf(object):
 			sub.sensor_profiles.sensor_profile.append(new_sgroup)
 	
 			rpc_service.create(xr, sub)
-			'''
-			TODO: configure destination group
+			
 			dgroup = oc_telemetry.TelemetrySystem.DestinationGroups.DestinationGroup()
 			dgroup.group_id = self.DgroupName
 			dgroup.config.group_id = self.DgroupName
-			'''
+			dgroup.destinations = dgroup.Destinations()
+			
+			new_destination = dgroup.Destinations.Destination()
+			new_destination.destination_address = self.DestIp
+			new_destination.config.destination_address = self.DestIp
+			new_destination.destination_port = int(self.RmtPort)
+			new_destination.config.destination_port = int(self.RmtPort)
+			
+			dgroup.destinations.destination.append(new_destination)
+			rpc_service.create(xr, dgroup)
+			
+
 		except:
 			returncode = 4
 		xr.close()
