@@ -1,3 +1,11 @@
+'''
+Backend function to configure telemetry (MDT) on Cisco router via SSH
+Version: 1.1
+Change history:
+	v1.0	2016-09-27	AA	Created first version
+	v1.1	2016-09-28	YS	Support multiple sensors
+'''
+
 from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetMikoTimeoutException, NetMikoAuthenticationException
 import sys
@@ -91,11 +99,16 @@ class MdtSSHconf(object):
 
            output = xr.send_config_set(create_destination_group)
         #    print(output)
+	   split = ","
+	   PathList = self.SPath.split(split)
 
            create_sensor_group = [ 'telemetry model-driven',
-                               'sensor-group ' + self.SGroupName,
-                               'sensor-path  '+ self.SPath ,
-                               'commit' ]
+                               'sensor-group ' + self.SGroupName ]
+	   for path in PathList:
+		create_sensor_group.append('sensor-path '+ path)
+		print "path is "+path
+		
+	   create_sensor_group.append('commit')
 
            output = xr.send_config_set(create_sensor_group)
         #    print(output)

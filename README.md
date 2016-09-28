@@ -6,24 +6,24 @@ Introduction:
 	
 Files:
 
-	Model Driven Telemery (MDT)
+	Model Driven Telemetry (MDT)
 		API via Yang/Netconf          
-			model/mdtconf_ext.py (extension 1)	
+			model/mdtconf_netconf.py 	(not complete yet)
 		
 		API via YDK
 			model/mdtconf_ydk.py
 			model/call_mdtconf_ydk.py (sample client code)
 			
 		API via SSH (Netmiko)      
-			model/mdtconf_ssh.py (extension 2)
-			
+			model/mdtconf_ssh.py 
+			model/call_mdtconf_ssh.py (sample client code)
 		
 	Policy Driven Telemetry (PDT)
 		API via SSH/SCP (Paramiko) 
 			model/pdtconf.py
 			model/call_pdtconf.py (sample client code)
 
-MDT API specification:
+MDT API specification (for all implementations: YDK, SSH, Netconf/Yang):
 
 	Input variables:
 		1: RouteId: Router's ip address or name which is accessible via SSH/Telnet
@@ -63,7 +63,25 @@ Sample code of calling MDT API (YDK)
 	##delete configure##
 	result = conf.del_conf()
 	
+Sample code of calling MDT API (SSH)
 
+	from mdtconf_ssh import MdtSSHconf
+	conf = MdtSSHconf(RouterId,Username,Password,RouterPort,
+		AccessProtocol,DgroupName,AddFamily,DestIp,RmtPort,SGroupName,
+		SPath,SubName,SubId,Interval)
+	
+	##push all configuration##
+	result = conf.configureAll()
+	
+	##push subscription configuration only##
+	result = conf.subscription()
+	
+	##push sesor configuration only##
+	result = conf.sensor()
+	
+	##push destination group configuration only##
+	result = conf.destination()
+	
 PDT API specification:
 
 	Input variables:
@@ -130,6 +148,32 @@ Example of using "call_mdtconf_ydk.py" to call MDT API (YDK)
 	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 	Sub1 4 3000
 
+Example of using "call_mdtconf_ssh.py" to call MDT API (SSH)
+	python call_mdtconf_ssh.py [ConfigType] [router ip] [user name] [password] [RouterPort] [access protocol] \
+		[destination group name] [address family] [destination ip] [remote port] \
+		[sensor group name] [sensor path] [subscription name] [subscription ID] [interval]
+
+	eg:
+	Pushing all configuration
+	python call_mdtconf_ssh.py configAll 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
+
+	Adding subscription only:
+	python call_mdtconf_ssh.py sub 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
+
+	Adding destination only:
+	python call_mdtconf_ssh.py dest 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
+
+	Adding sensor path only:
+	python call_mdtconf_ssh.py sensor 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000	
+	
 Example of using "call_pdtconf.py" to call PDT API
 	
 	Sytax of running "call_pdtconf.py":
@@ -169,89 +213,3 @@ Example of using "call_pdtconf.py" to call PDT API
 	python call_pdtconf.py --n=64.104.255.10 --rp=5000 --u=vagrant --p=vagrant --pn=Test --pp="aa,bb,cc" \
 	--dst=172.32.1.1 --pg=testgroup12
 
-MDT API extention 1 code: model/mdtconf_ext.py
-
-	This configuration is an extension of MDT API. 
-	This code is a Configuring Model-Driven Telemetry (MDT) with OpenConfig
-	YANG OpenConfig YANG that uses a netconf client. 
-	This configuration extends the capability of MDT API for supporting
-	multi path within the same subscription group.
-	
-	The extension API takes six arguments.
-        1 - RouterId (Router IP address)
-        2 - Username (Router username)
-        3 - password (Router Password)
-        4 - RouterPort (Router Port number)
-        5 - SGroupName (Subscription group name)
-        6 - SPath (Subscription path)
-
-
-	To run the script:
-        python mdtconf_ext.py RouterId Username password RouterPort SGroupName SPath
-
-	Ex.:
-        python mdtconf_ext.py 192.168.2.3 vagrant vagrant 22 SGroup4 CiscoWorld:arp/nodes/node/entries/entry
-		
-MDT API extention 2 code: model/mdtconf_ssh.py
-	
-	This API is model driven implementation to router using Netmiko (SSH)
-
-	This API has 11 arguments and 4 functions
-	
-	1- Command : This argument is used to choose the configuration type
-						 ex;
-						 1- newConfig : To have a new configuration with new Destination Group, Sensor Group and Subscription
-						 2- subscription: To only create a new subscription
-						 3- destination: To only create a new destination group
-						 4- sensor: To only create a new sensor group
-	
-	2- RouterId : The router IP address
-	3- Username : The router username
-	4- Password : The router password
-	5- RouterPort : The router port number
-	6- DgroupName : Destination Group Name
-	7- DIPAddress : Destination IPv4 address
-	8- DgroupPort : Destination port number
-	9- SenorGroupName : Sensor Group Name
-	10- SensorPath : Sensor path
-	11- SubName : Subscription Name
-	12- interval : Streaming interval
-	
-	Funtions are:-
-
-	configureAll(): To invoke:
-					python mdtconf_ssh.py  newConfig RouterId Username Password RouterPort DgroupName \
-					DIPAddress  DgroupPort SenorGroupName SensorPath SubName interval
-
-					Ex:
-					python mdtconf_ssh.py  newConfig  192.168.2.3 vagrant vagrant 22 Dgroup1 172.16.18.5 5001 \
-					SGroup1 sgroup1/ciscorouter/com Sub1 3000
-
-
-	subscription():To invoke:
-					python mdtconf_ssh.py  subscription RouterId Username Password RouterPort DgroupName \
-					SubName SenorGroupName interval
-
-					Ex:
-					python mdtconf_ssh.py  subscription  192.168.2.3 vagrant vagrant 22 Dgroup1 Sub2  \
-					SGroup1  3000
-
-
-	destination(): To invoke:
-
-					python mdtconf_ssh.py  destination RouterId Username Password RouterPort DgroupName \
-					DIPAddress DgroupPort
-					
-					Ex:
-					python mdtconf_ssh.py  destination  192.168.2.3 vagrant vagrant 22 Dgroup2 \
-					192.168.4.3  7872
-
-
-	sensor(): 		To invoke:
-					python mdtconf_ssh.py  sensor RouterId Username Password RouterPort SenorGroupName SensorPath
-
-
-					Ex:
-					python mdtconf_ssh.py  sensor  192.168.2.3 vagrant vagrant 22 SGroup2 \
-					Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
-	
