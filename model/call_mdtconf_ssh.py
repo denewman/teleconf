@@ -63,6 +63,14 @@ def main(argv):
         result = conf.sensor()
     elif ConfigType == "dest":
         result = conf.destination()
+    elif ConfigType == "deleteSub":
+        result = conf.deleteSub()
+    elif ConfigType == "deleteSensor":
+        result = conf.deleteSensor()
+    elif ConfigType == "deleteMDT":
+        result = conf.deleteMDTconfig()
+    elif ConfigType == "deleteDestination":
+        result = conf.deleteDestination()
 
 
 if __name__ == '__main__':
