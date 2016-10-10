@@ -3,6 +3,7 @@ Backend function to configure policy based telemetry (PDT) on Cisco router
 Version: 1.0
 Change history:
 	v1.0	2016-09-09	YS	Created first version
+	v1.1	2016-10-10	YS	Added deletion function
 '''
 
 import json
@@ -235,14 +236,64 @@ class Pdtconf(object):
 		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
 		
-	def del_conf(self):
+	def deletePolicyGroup(self):
 		'''
-		This deletion function has not been implemented yet
-		TODO: develop the actual deletion function
+		Delete the policy group only
 		'''
-		print "Deletion function is not supported yet"
-		returncode = 11
+		returncode = 0
+		ssh,scp,returncode = self.access_router()
+		if returncode > 0:
+			print "\n"+self.OUTPUT.get(returncode)+"\n"
+			return returncode
+		if returncode == 0:
+			print "removing policy group "+self.PolicyGroupName+" from router......"
+			try:
+				channel2 = ssh.invoke_shell()			
+				sys.stdout.flush()
+				time.sleep(3)
+				channel2.send('conf t\r\n')
+				channel2.send('telemetry\r\n')
+				channel2.send('encoder json\r\n')
+				cmd = "no policy group "+self.PolicyGroupName+"\r\n"
+				channel2.send(cmd)
+				channel2.send('commit\r\n')
+				time.sleep(2)
+				channel2.close				
+			except:
+				returncode = 11
+		
+		scp.close
+		ssh.close
 		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
 		
+	def deletePDTconfig(self):	
+		'''
+		Delete all PDT configure
+		'''
+		returncode = 0
+		ssh,scp,returncode = self.access_router()
+		if returncode > 0:
+			print "\n"+self.OUTPUT.get(returncode)+"\n"
+			return returncode
+		if returncode == 0:
+			print "removing policy group "+self.PolicyGroupName+" from router......"
+			try:
+				channel2 = ssh.invoke_shell()			
+				sys.stdout.flush()
+				time.sleep(3)
+				channel2.send('conf t\r\n')
+				channel2.send('no telemetry encoder json\r\n')
+				channel2.send('commit\r\n')
+				time.sleep(2)
+				channel2.close				
+			except:
+				returncode = 11
 		
+		scp.close
+		ssh.close
+		print "\n"+self.OUTPUT.get(returncode)+"\n"
+		return returncode
+	
+	
+	

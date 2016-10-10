@@ -60,8 +60,17 @@ Sample code of calling MDT API (YDK)
 	##push configure##
 	result = conf.push_conf()
 	
-	##delete configure##
-	result = conf.del_conf()
+	##delete all MDT configure##
+	result = conf.deleteMDTconfig()
+	
+	##only delete the given subscription##
+	result = conf.deleteSub()
+	
+	##only delete the given sensor group##
+	result = conf.deleteSensor()
+	
+	##only delete the given destination group##
+	result = conf.deleteDestination()
 	
 Sample code of calling MDT API (SSH)
 
@@ -81,6 +90,18 @@ Sample code of calling MDT API (SSH)
 	
 	##push destination group configuration only##
 	result = conf.destination()
+	
+	##delete all MDT configure##
+	result = conf.deleteMDTconfig()
+	
+	##only delete the given subscription##
+	result = conf.deleteSub()
+	
+	##only delete the given sensor group##
+	result = conf.deleteSensor()
+	
+	##only delete the given destination group##
+	result = conf.deleteDestination()
 	
 PDT API specification:
 
@@ -127,8 +148,11 @@ Sample code of calling PDT API (SSH/SCP)
 	##push configure##
 	result = conf.push_conf()
 	
-	##delete configure##
-	result = conf.del_conf()
+	##delete all PDT configure##
+	result = conf.deletePDTconfig()
+	
+	##only delete the given policy group##
+	result = conf.deletePolicyGroup()
 
 
 Example of using "call_mdtconf_ydk.py" to call MDT API (YDK)

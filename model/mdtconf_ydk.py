@@ -7,6 +7,10 @@ Change history:
 	v1.2   	2016-08-26  AA  Added MDT confgiuration deleting function
 	v1.3	2016-09-25	YS	Support multiple sensors
 	v1.4	2016-09-28	YS	Added Destination group configure
+	v1.5	2016-09-30	YS	Added encoding and protocol values
+							when configuring Destination group
+	v1.6	2016-10-10	YS	Added deletion function to delte only
+							sensor or subscription
 '''
 from ydk.providers import NetconfServiceProvider
 from ydk.services import CRUDService 
@@ -142,7 +146,9 @@ class Mdtconf(object):
 		return returncode
 		
 	def del_conf(self):
-
+		'''
+		This function is duplicate to deleteMDTConfig()
+		'''
 		returncode = 0
 		xr,returncode = self.access_router()
 
@@ -160,5 +166,98 @@ class Mdtconf(object):
 		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
 		
-	
+	def deleteMDTconfig(self):
+		'''
+		Delete all MDT configure
+		'''
+		returncode = 0
+		xr,returncode = self.access_router()
+
+		if returncode > 0:
+			print "\n"+self.OUTPUT.get(returncode)+"\n"
+			return returncode
+
+		try:
+			rpc_service = CRUDService()
+			rpc_service.delete(xr, oc_telemetry.TelemetrySystem())
+		except:
+			returncode = 11
+		xr.close()
+
+		print "\n"+self.OUTPUT.get(returncode)+"\n"
+		return returncode
 		
+	def deleteSub(self):
+		'''
+		Delete subscription only
+		'''
+		returncode = 0
+		xr,returncode = self.access_router()
+
+		if returncode > 0:
+			print "\n"+self.OUTPUT.get(returncode)+"\n"
+			return returncode
+		
+		try:
+			rpc_service = CRUDService()
+			sub = oc_telemetry.TelemetrySystem.Subscriptions.Persistent.Subscription()
+			sub.subscription_id = long(self.SubId)
+			sub.config.subscription_id = long(self.SubId)
+			rpc_service.delete(xr, sub)			
+		except:
+			returncode = 11
+		
+		xr.close()
+
+		print "\n"+self.OUTPUT.get(returncode)+"\n"
+		return returncode
+	
+	def deleteSensor(self):
+		'''
+		Delete sensor group only
+		'''
+		returncode = 0
+		xr,returncode = self.access_router()
+
+		if returncode > 0:
+			print "\n"+self.OUTPUT.get(returncode)+"\n"
+			return returncode
+		
+		try:
+			rpc_service = CRUDService()
+			sgroup = oc_telemetry.TelemetrySystem.SensorGroups.SensorGroup()
+			sgroup.sensor_group_id = self.SGroupName
+			sgroup.config.sensor_group_id = self.SGroupName
+			rpc_service.delete(xr, sgroup)			
+		except:
+			returncode = 11
+		
+		xr.close()
+
+		print "\n"+self.OUTPUT.get(returncode)+"\n"
+		return returncode
+	
+	def deleteDestination(self):
+		'''
+		Delete desntination group only
+		'''
+		returncode = 0
+		xr,returncode = self.access_router()
+
+		if returncode > 0:
+			print "\n"+self.OUTPUT.get(returncode)+"\n"
+			return returncode
+		
+		try:
+			rpc_service = CRUDService()
+			dgroup = oc_telemetry.TelemetrySystem.DestinationGroups.DestinationGroup()
+			dgroup.group_id = self.DgroupName
+			dgroup.config.group_id = self.DgroupName
+			rpc_service.delete(xr, dgroup)			
+		except:
+			returncode = 11
+		
+		xr.close()
+
+		print "\n"+self.OUTPUT.get(returncode)+"\n"
+		return returncode
