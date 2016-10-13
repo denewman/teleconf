@@ -7,8 +7,9 @@ Introduction:
 Files:
 
 	Model Driven Telemetry (MDT)
-		API via Yang/Netconf          
-			model/mdtconf_netconf.py 	(not complete yet)
+		API via Netconf/Yang          
+			model/mdtconf_netconfYang.py
+			model/call_netconfYang.py (sample client code)
 		
 		API via YDK
 			model/mdtconf_ydk.py
@@ -72,12 +73,22 @@ Sample code of calling MDT API (YDK)
 	##only delete the given destination group##
 	result = conf.deleteDestination()
 	
-Sample code of calling MDT API (SSH)
+Sample code of calling MDT API (SSH and Netconf/Yang)
 
+	##for MDT SSH##
 	from mdtconf_ssh import MdtSSHconf
 	conf = MdtSSHconf(RouterId,Username,Password,RouterPort,
 		AccessProtocol,DgroupName,AddFamily,DestIp,RmtPort,SGroupName,
 		SPath,SubName,SubId,Interval)
+	
+	##for MDT Netconf/Yang##
+	from mdtconf_netconfYang import MdtNetconfYang
+	conf = MdtNetconfYang(RouterId,Username,Password,RouterPort,
+		AccessProtocol,DgroupName,AddFamily,DestIp,RmtPort,SGroupName,
+		SPath,SubName,SubId,Interval)
+	
+	
+	##for both MDT SSH and MDT Netconf/Yang##
 	
 	##push all configuration##
 	result = conf.configureAll()
@@ -162,12 +173,12 @@ Example of using "call_mdtconf_ydk.py" to call MDT API (YDK)
 		[sensor group name] [sensor path] [subscription name] [subscription ID] [interval]
 		
 	eg:
-	Pushing configuration
+	##Pushing configuration##
 	python call_mdtconf_ydk.py push 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 	Sub1 4 3000
 
-	Deleting configuration:
+	##Deleting configuration:##
 	python call_mdtconf_ydk.py delete 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 	Sub1 4 3000
@@ -178,25 +189,51 @@ Example of using "call_mdtconf_ssh.py" to call MDT API (SSH)
 		[sensor group name] [sensor path] [subscription name] [subscription ID] [interval]
 
 	eg:
-	Pushing all configuration
+	##Pushing all configuration##
 	python call_mdtconf_ssh.py configAll 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 	Sub1 4 3000
 
-	Adding subscription only:
+	##Adding subscription only:##
 	python call_mdtconf_ssh.py sub 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 	Sub1 4 3000
 
-	Adding destination only:
+	##Adding destination only:##
 	python call_mdtconf_ssh.py dest 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 	Sub1 4 3000
 
-	Adding sensor path only:
+	##Adding sensor path only:##
 	python call_mdtconf_ssh.py sensor 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
 	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
 	Sub1 4 3000	
+	
+Example of using "call_netconfYang.py" to call MDT API (Netconf/Yang)
+	python call_netconfYang.py [ConfigType] [router ip] [user name] [password] [RouterPort] [access protocol] \
+		[destination group name] [address family] [destination ip] [remote port] \
+		[sensor group name] [sensor path] [subscription name] [subscription ID] [interval]
+
+	eg:
+	##Pushing all configuration##
+	python call_netconfYang.py configAll 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
+
+	##Adding subscription only:##
+	python call_netconfYang.py sub 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
+
+	##Adding destination only:##
+	python call_netconfYang.py dest 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
+
+	##Adding sensor path only:##
+	python call_netconfYang.py sensor 192.168.2.3 vagrant vagrant 22 ssh Dgroup1 ipv4 172.30.8.4 5432 SGroup1 \
+	"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters" \
+	Sub1 4 3000
 	
 Example of using "call_pdtconf.py" to call PDT API
 	
