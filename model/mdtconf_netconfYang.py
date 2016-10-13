@@ -8,6 +8,7 @@ Change history:
 							destianation group ip address from 
 							172.16.15.14 to the input valriable 
 							self.DestIp
+							changed protcol from "grpc" to "tcp"
 '''
 from ncclient import manager
 import re
