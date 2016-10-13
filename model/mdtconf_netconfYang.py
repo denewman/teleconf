@@ -4,6 +4,10 @@ using ncclient
 Version: 1.0
 Change history:
 	v1.0	2016-10-13	AA	Implemeted Netconf/Yang telemetry API
+	v1.1	2016-10-14	YS	Within configureAll function, changed 
+							destianation group ip address from 
+							172.16.15.14 to the input valriable 
+							self.DestIp
 '''
 from ncclient import manager
 import re
@@ -90,7 +94,7 @@ class MdtNetconfYang(object):
 
 		returncode = 0
 		xr , returncode = self.access_router()
-
+		
 		try:
 			edit_data = '''
 			<config>
@@ -106,7 +110,7 @@ class MdtNetconfYang(object):
 			        <destination-port>'''+ self.RmtPort +'''</destination-port>
 			        <encoding>self-describing-gpb</encoding>
 			        <protocol>
-			         <protocol>grpc</protocol>
+			         <protocol>tcp</protocol>
 			         <tls-hostname></tls-hostname>
 			         <no-tls>0</no-tls>
 			        </protocol>
@@ -216,11 +220,11 @@ class MdtNetconfYang(object):
 				      <destination>
 				       <address-family>'''+self.AddFamily+'''</address-family>
 				       <'''+self.AddFamily+'''>
-				        <'''+self.AddFamily+'''-address>172.16.15.14</'''+self.AddFamily+'''-address>
+						<'''+self.AddFamily+'''-address>''' + self.DestIp + '''</'''+self.AddFamily+'''-address>
 				        <destination-port>'''+self.RmtPort+'''</destination-port>
 				        <encoding>self-describing-gpb</encoding>
 				        <protocol>
-				         <protocol>grpc</protocol>
+				         <protocol>tcp</protocol>
 				         <tls-hostname></tls-hostname>
 				         <no-tls>0</no-tls>
 				        </protocol>
