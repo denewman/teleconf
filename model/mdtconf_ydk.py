@@ -11,10 +11,14 @@ Change history:
 							when configuring Destination group
 	v1.6	2016-10-10	YS	Added deletion function to delte only
 							sensor or subscription
+	v2.0	2016-10-14	YS	Use cisco XR native schema to configure
+							encoding and protocol within destination 
+							group
 '''
 from ydk.providers import NetconfServiceProvider
 from ydk.services import CRUDService 
 import ydk.models.openconfig.openconfig_telemetry as oc_telemetry 
+import ydk.models.cisco_ios_xr.Cisco_IOS_XR_telemetry_model_driven_cfg as xr_telemetry
 from ydk.services import CRUDService
 from ncclient.transport.errors import AuthenticationError,SSHError
 
@@ -93,6 +97,7 @@ class Mdtconf(object):
 		if returncode > 0:
 			print "\n"+self.OUTPUT.get(returncode)+"\n"
 			return returncode
+		
 		try:
 			sgroup = oc_telemetry.TelemetrySystem.SensorGroups.SensorGroup()
 			sgroup.sensor_group_id = self.SGroupName
@@ -123,16 +128,22 @@ class Mdtconf(object):
 	
 			rpc_service.create(xr, sub)
 			
-			dgroup = oc_telemetry.TelemetrySystem.DestinationGroups.DestinationGroup()
-			dgroup.group_id = self.DgroupName
-			dgroup.config.group_id = self.DgroupName
+			
+			dgroup = xr_telemetry.TelemetryModelDriven.DestinationGroups.DestinationGroup()
+			dgroup.destination_id = self.DgroupName
 			dgroup.destinations = dgroup.Destinations()
 			
 			new_destination = dgroup.Destinations.Destination()
-			new_destination.destination_address = self.DestIp
-			new_destination.config.destination_address = self.DestIp
-			new_destination.destination_port = int(self.RmtPort)
-			new_destination.config.destination_port = int(self.RmtPort)
+			new_destination.address_family = xr_telemetry.AfEnum.IPV4
+			
+			new_ipv4=xr_telemetry.TelemetryModelDriven.DestinationGroups.DestinationGroup().Destinations().Destination().Ipv4()
+			new_ipv4.destination_port = int(self.RmtPort)
+			new_ipv4.ipv4_address = self.DestIp
+			
+			new_ipv4.encoding = xr_telemetry.EncodeTypeEnum.SELF_DESCRIBING_GPB
+			new_ipv4.protocol = xr_telemetry.TelemetryModelDriven.DestinationGroups.DestinationGroup().Destinations().Destination().Ipv4().Protocol()
+			new_ipv4.protocol.protocol = xr_telemetry.ProtoTypeEnum.TCP
+			new_destination.ipv4.append(new_ipv4)
 			
 			dgroup.destinations.destination.append(new_destination)
 			rpc_service.create(xr, dgroup)
@@ -250,9 +261,14 @@ class Mdtconf(object):
 		
 		try:
 			rpc_service = CRUDService()
+			dgroup = xr_telemetry.TelemetryModelDriven.DestinationGroups.DestinationGroup()
+			dgroup.destination_id = self.DgroupName
+			
+			'''
 			dgroup = oc_telemetry.TelemetrySystem.DestinationGroups.DestinationGroup()
 			dgroup.group_id = self.DgroupName
 			dgroup.config.group_id = self.DgroupName
+			'''
 			rpc_service.delete(xr, dgroup)			
 		except:
 			returncode = 11
