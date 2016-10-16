@@ -1,0 +1,62 @@
+
+##this is the pre-defined profile to test MDT API##
+##All the bellow testing parameters can be modified accordingly##
+
+##full path of python program##
+PYTHON	/usr/bin/python
+
+##full path of the API calling program (client code)##
+MDT_SSH	../model/call_mdtconf_ssh.py
+MDT_YDK	../model/call_mdtconf_ydk.py
+MDT_NET	../model/call_netconfYang.py
+PDT	../model/call_pdtconf.py
+
+##number of testing##
+TESTNUMBER	5
+
+##interval between each testing (in seconds)##
+INTERVAL	2
+
+##single sensor path for MDT API testing##
+MDTSINGLEPATH	Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+
+##multi sensor path for MDT API testing##
+MDTMULTIPATH	Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters,bbb
+
+##Router ip address##
+ROUTERIP	64.104.255.10
+
+##SSH port to access Router##
+SSHPORT	5000
+
+##Netconf port to access router##
+NETCONFPORT	5001
+
+##user name to access router##
+USRNAME	rmitproject
+
+##password to access router##
+PASSWD	r@mot@supp@rt
+
+##prefix of destination group name##
+DESTGFREIX dgroup
+
+##prefix of sensor name##
+SENSORPREFIX	sensortest
+
+##ip address of destination group ##
+##if more than one ip address, use commoa (,) to seperate them##
+DETINATIONIP	172.32.1.1,172.32.1.2
+
+##remote port of destination host##
+RMTPORT	5432
+
+##address family##
+ADDFAMILY	ipv4
+
+##full path of testing log file##
+LOG	./testlog
+
+
+
+ 
