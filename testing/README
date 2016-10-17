@@ -3,6 +3,7 @@
 Files:
 	testprofile.txt:	Profile file contains all testing parameters
 	test_mdtydk.sh:		script for testing MDT YDK API
+	test_mdtssh.sh:		script for testing MDT SSH API
 	
 How to run the testing script:
 
@@ -45,7 +46,7 @@ script completed, all details are saved in ./testlog
 
 
 Script usage: 
-the bellow usage is for test_mdtydk.sh
+the bellow usage is for test_mdtydk.sh, it is same for other testing script
 
   Usage:  ./test_mdtydk.sh {-f <test profile>}
 
