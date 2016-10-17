@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#script name: test_mdtydk.sh
-#purpose: test MDT YDK API. 
+#script name: test_mdtssh.sh
+#purpose: test MDT SSH API. 
 #author: Yifeng Shen
 #version: 1.0
 #Create date:  2016-10-15
 #Change history:
 
-SCRIPTNAME="test_mdtydk.sh"
+SCRIPTNAME="test_mdtssh.sh"
 AWK="/usr/bin/awk"
 DATE="/bin/date"
 WC="/usr/bin/wc"
@@ -157,7 +157,7 @@ function getvalues
 	returncode=0
 	
 	##find the main API client programm##
-	KEYWD="MDT_YDK"
+	KEYWD="MDT_SSH"
 	MAINPGORAM=`$GREP $KEYWD $TESTPROFILE | $HEAD -1 | $AWK '{print $NF}'`
 	if [ ! -n "$MAINPGORAM" -o ! -f $MAINPGORAM ] 
 	  then
@@ -229,7 +229,7 @@ function getvalues
 	fi
 	
 	##find access port of the router##
-	KEYWD="NETCONFPORT"
+	KEYWD="SSHPORT"
 	ACCESSPORT=`$GREP $KEYWD $TESTPROFILE | $HEAD -1 | $AWK '{print $NF}'`
 	if [ ! -n "$ACCESSPORT" ] 
 	  then
@@ -395,7 +395,7 @@ i=0
 testreulst="NA"
 timestamp=`$DATE '+%b%e %T' | $AWK -F '[: ]' '{print $1"-"$2"-"$3"-"$4}'`
 echo "$timestamp [$SCRIPTNAME] removing old configure on $ROUTERIP started......" | $TEE -a $LOG
-$PYTHON $MAINPGORAM delete $ROUTERIP $USRNAME $PASSWD $ACCESSPORT ssh $DESTGPREFIX \
+$PYTHON $MAINPGORAM deleteMDT $ROUTERIP $USRNAME $PASSWD $ACCESSPORT ssh $DESTGPREFIX \
 $ADDFAMILY $DETINATIONLST $RMTPORT $SENSORPREFIX $MDTSINGLEPATH $SUBSCIPTPREFIX \
 $SUBID $POLLINGINTERVAL > $TMPLOG
 timestamp=`$DATE '+%b%e %T' | $AWK -F '[: ]' '{print $1"-"$2"-"$3"-"$4}'`
@@ -425,7 +425,7 @@ while [ $i -lt $TESTNUMBER ]
   
   SUBID=`expr $SUBID + 1`
   
-  $PYTHON $MAINPGORAM push $ROUTERIP $USRNAME $PASSWD $ACCESSPORT ssh $DESTGPREFIX \
+  $PYTHON $MAINPGORAM configAll $ROUTERIP $USRNAME $PASSWD $ACCESSPORT ssh $DESTGPREFIX \
 $ADDFAMILY $DETINATIONLST $RMTPORT $SENSORGROUPNAME $SENSORPATH $SUBSCIPTPREFIX \
 $SUBID $POLLINGINTERVAL > $TMPLOG
   if grep "Operation success" $TMPLOG 2>&1 > /dev/null

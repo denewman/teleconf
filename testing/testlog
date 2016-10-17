@@ -413,3 +413,299 @@ Operation success!
 
 Oct17-09-51-03 test (10/10) completed. Result: pass
 Oct17-09-51-08 Summary: Total tests executed: 10, Passed: 10, Failed: 0
+Oct17-23-08-43 [test_mdtydk.sh] removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-23-08-46 [test_mdtydk.sh] removing old configure on 64.104.255.10: sucess!
+Oct17-23-08-46 [test_mdtydk.sh] test (1/4) started......
+
+Operation success!
+
+Oct17-23-08-50 [test_mdtydk.sh] test (1/4) completed. Result: pass
+Oct17-23-08-55 [test_mdtydk.sh] test (2/4) started......
+
+Operation success!
+
+Oct17-23-08-59 [test_mdtydk.sh] test (2/4) completed. Result: pass
+Oct17-23-09-04 [test_mdtydk.sh] test (3/4) started......
+
+Operation success!
+
+Oct17-23-09-08 [test_mdtydk.sh] test (3/4) completed. Result: pass
+Oct17-23-09-13 [test_mdtydk.sh] test (4/4) started......
+
+Operation success!
+
+Oct17-23-09-17 [test_mdtydk.sh] test (4/4) completed. Result: pass
+Oct17-23-09-22 [test_mdtydk.sh] Summary: Total tests executed: 4, Passed: 4, Failed: 0
+Oct17-23-09-37 [test_mdtydk.sh] removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-23-09-39 [test_mdtydk.sh] removing old configure on 64.104.255.10: sucess!
+Oct17-23-09-39 [test_mdtydk.sh] test (1/10) started......
+
+Operation success!
+
+Oct17-23-09-43 [test_mdtydk.sh] test (1/10) completed. Result: pass
+Oct17-23-09-49 [test_mdtydk.sh] test (2/10) started......
+
+Operation success!
+
+Oct17-23-09-53 [test_mdtydk.sh] test (2/10) completed. Result: pass
+Oct17-23-09-58 [test_mdtydk.sh] test (3/10) started......
+
+Operation success!
+
+Oct17-23-10-02 [test_mdtydk.sh] test (3/10) completed. Result: pass
+Oct17-23-10-07 [test_mdtydk.sh] test (4/10) started......
+
+Operation success!
+
+Oct17-23-10-11 [test_mdtydk.sh] test (4/10) completed. Result: pass
+Oct17-23-10-16 [test_mdtydk.sh] test (5/10) started......
+
+Operation success!
+
+Oct17-23-10-19 [test_mdtydk.sh] test (5/10) completed. Result: pass
+Oct17-23-10-24 [test_mdtydk.sh] test (6/10) started......
+
+Operation success!
+
+Oct17-23-10-29 [test_mdtydk.sh] test (6/10) completed. Result: pass
+Oct17-23-10-34 [test_mdtydk.sh] test (7/10) started......
+
+Operation success!
+
+Oct17-23-10-37 [test_mdtydk.sh] test (7/10) completed. Result: pass
+Oct17-23-10-42 [test_mdtydk.sh] test (8/10) started......
+
+Operation success!
+
+Oct17-23-10-46 [test_mdtydk.sh] test (8/10) completed. Result: pass
+Oct17-23-10-51 [test_mdtydk.sh] test (9/10) started......
+
+Operation success!
+
+Oct17-23-10-56 [test_mdtydk.sh] test (9/10) completed. Result: pass
+Oct17-23-11-01 [test_mdtydk.sh] test (10/10) started......
+
+Operation success!
+
+Oct17-23-11-05 [test_mdtydk.sh] test (10/10) completed. Result: pass
+Oct17-23-11-10 [test_mdtydk.sh] Summary: Total tests executed: 10, Passed: 10, Failed: 0
+Oct17-23-16-53 [test_mdtssh.sh] removing old configure on 64.104.255.10 started......
+Oct17-23-16-55 [test_mdtssh.sh] removing old configure on 64.104.255.10: fail!
+Oct17-23-16-55 [test_mdtssh.sh] test (1/10) started......
+Oct17-23-16-56 [test_mdtssh.sh] test (1/10) completed. Result: fail
+Oct17-23-17-01 [test_mdtssh.sh] test (2/10) started......
+Oct17-23-17-02 [test_mdtssh.sh] test (2/10) completed. Result: fail
+Oct17-23-17-07 [test_mdtssh.sh] test (3/10) started......
+Oct17-23-17-08 [test_mdtssh.sh] test (3/10) completed. Result: fail
+Oct17-23-17-13 [test_mdtssh.sh] test (4/10) started......
+Oct17-23-17-14 [test_mdtssh.sh] test (4/10) completed. Result: fail
+Oct17-23-17-19 [test_mdtssh.sh] test (5/10) started......
+Oct17-23-17-21 [test_mdtssh.sh] test (5/10) completed. Result: fail
+Oct17-23-34-00 [test_mdtssh.sh] removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-23-34-06 [test_mdtssh.sh] removing old configure on 64.104.255.10: sucess!
+Oct17-23-34-06 [test_mdtssh.sh] test (1/10) started......
+
+Operation success!
+
+Oct17-23-34-17 [test_mdtssh.sh] test (1/10) completed. Result: pass
+Oct17-23-34-22 [test_mdtssh.sh] test (2/10) started......
+
+Operation success!
+
+Oct17-23-34-36 [test_mdtssh.sh] test (2/10) completed. Result: pass
+Oct17-23-34-41 [test_mdtssh.sh] test (3/10) started......
+
+Operation success!
+
+Oct17-23-34-52 [test_mdtssh.sh] test (3/10) completed. Result: pass
+Oct17-23-34-57 [test_mdtssh.sh] test (4/10) started......
+
+Operation success!
+
+Oct17-23-35-11 [test_mdtssh.sh] test (4/10) completed. Result: pass
+Oct17-23-35-16 [test_mdtssh.sh] test (5/10) started......
+
+Operation success!
+
+Oct17-23-35-27 [test_mdtssh.sh] test (5/10) completed. Result: pass
+Oct17-23-35-32 [test_mdtssh.sh] test (6/10) started......
+
+Operation success!
+
+Oct17-23-35-46 [test_mdtssh.sh] test (6/10) completed. Result: pass
+Oct17-23-35-51 [test_mdtssh.sh] test (7/10) started......
+
+Operation success!
+
+Oct17-23-36-02 [test_mdtssh.sh] test (7/10) completed. Result: pass
+Oct17-23-36-07 [test_mdtssh.sh] test (8/10) started......
+
+Operation success!
+
+Oct17-23-36-21 [test_mdtssh.sh] test (8/10) completed. Result: pass
+Oct17-23-36-26 [test_mdtssh.sh] test (9/10) started......
+
+Operation success!
+
+Oct17-23-36-37 [test_mdtssh.sh] test (9/10) completed. Result: pass
+Oct17-23-36-42 [test_mdtssh.sh] test (10/10) started......
+
+Operation success!
+
+Oct17-23-36-55 [test_mdtssh.sh] test (10/10) completed. Result: pass
+Oct17-23-37-00 [test_mdtssh.sh] Summary: Total tests executed: 10, Passed: 10, Failed: 0
+Oct17-23-38-46 [test_mdtssh.sh] removing old configure on 64.104.255.10 started......
+Oct17-23-38-47 [test_mdtssh.sh] removing old configure on 64.104.255.10: fail!
+Oct17-23-38-47 [test_mdtssh.sh] test (1/10) started......
+Oct17-23-38-47 [test_mdtssh.sh] test (1/10) completed. Result: fail
+Oct17-23-38-57 [test_mdtssh.sh] removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-23-39-03 [test_mdtssh.sh] removing old configure on 64.104.255.10: sucess!
+Oct17-23-39-03 [test_mdtssh.sh] test (1/10) started......
+telemetry model-driven
+
+RP/0/RP0/CPU0:test_XR(config-model-driven)#subscription subtest101
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#sensor-group-id sensortest.1 sa$ sam                          ple-interval 30000sensor-group-id sensortest.1 s$
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#destination-id dgroup
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#commit
+
+Mon Oct 17 23:40:19.247 UTC
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#
+
+Operation success!
+
+Oct17-23-39-14 [test_mdtssh.sh] test (1/10) completed. Result: pass
+Oct17-23-39-19 [test_mdtssh.sh] test (2/10) started......
+telemetry model-driven
+
+RP/0/RP0/CPU0:test_XR(config-model-driven)#subscription subtest102
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#sensor-group-id sensortest.2 sa$ sam                          ple-interval 30000sensor-group-id sensortest.2 s$
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#destination-id dgroup
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#commit
+
+Mon Oct 17 23:40:38.052 UTC
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#
+
+Operation success!
+
+Oct17-23-39-33 [test_mdtssh.sh] test (2/10) completed. Result: pass
+Oct17-23-39-38 [test_mdtssh.sh] test (3/10) started......
+telemetry model-driven
+
+RP/0/RP0/CPU0:test_XR(config-model-driven)#subscription subtest103
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#sensor-group-id sensortest.3 sa$ sam                          ple-interval 30000sensor-group-id sensortest.3 s$
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#destination-id dgroup
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#commit
+
+Mon Oct 17 23:40:54.249 UTC
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#
+
+Operation success!
+
+Oct17-23-39-49 [test_mdtssh.sh] test (3/10) completed. Result: pass
+Oct17-23-39-54 [test_mdtssh.sh] test (4/10) started......
+telemetry model-driven
+
+RP/0/RP0/CPU0:test_XR(config-model-driven)#subscription subtest104
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#sensor-group-id sensortest.4 sa$ sam                          ple-interval 30000sensor-group-id sensortest.4 s$
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#destination-id dgroup
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#commit
+
+Mon Oct 17 23:41:17.465 UTC
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#
+
+Operation success!
+
+Oct17-23-40-12 [test_mdtssh.sh] test (4/10) completed. Result: pass
+Oct17-23-40-17 [test_mdtssh.sh] test (5/10) started......
+telemetry model-driven
+
+RP/0/RP0/CPU0:test_XR(config-model-driven)#subscription subtest105
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#sensor-group-id sensortest.5 sa$ sam                          ple-interval 30000sensor-group-id sensortest.5 s$
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#destination-id dgroup
+
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#commit
+
+Mon Oct 17 23:41:33.661 UTC
+RP/0/RP0/CPU0:test_XR(config-model-driven-subs)#
+
+Operation success!
+
+Oct17-23-40-28 [test_mdtssh.sh] test (5/10) completed. Result: pass
+Oct17-23-40-33 [test_mdtssh.sh] test (6/10) started......
+
+Operation success!
+
+Oct17-23-40-47 [test_mdtssh.sh] test (6/10) completed. Result: pass
+Oct17-23-40-52 [test_mdtssh.sh] test (7/10) started......
+
+Operation success!
+
+Oct17-23-41-03 [test_mdtssh.sh] test (7/10) completed. Result: pass
+Oct17-23-41-08 [test_mdtssh.sh] test (8/10) started......
+
+Operation success!
+
+Oct17-23-41-22 [test_mdtssh.sh] test (8/10) completed. Result: pass
+Oct17-23-41-27 [test_mdtssh.sh] test (9/10) started......
+
+Operation success!
+
+Oct17-23-41-43 [test_mdtssh.sh] test (9/10) completed. Result: pass
+Oct17-23-41-48 [test_mdtssh.sh] test (10/10) started......
+
+Operation success!
+
+Oct17-23-42-02 [test_mdtssh.sh] test (10/10) completed. Result: pass
+Oct17-23-42-07 [test_mdtssh.sh] Summary: Total tests executed: 10, Passed: 10, Failed: 0
+Oct17-23-47-08 [test_mdtssh.sh] removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-23-47-14 [test_mdtssh.sh] removing old configure on 64.104.255.10: sucess!
+Oct17-23-47-14 [test_mdtssh.sh] test (1/4) started......
+
+Operation success!
+
+Oct17-23-47-25 [test_mdtssh.sh] test (1/4) completed. Result: pass
+Oct17-23-47-30 [test_mdtssh.sh] test (2/4) started......
+
+Operation success!
+
+Oct17-23-47-44 [test_mdtssh.sh] test (2/4) completed. Result: pass
+Oct17-23-47-49 [test_mdtssh.sh] test (3/4) started......
+
+Operation success!
+
+Oct17-23-48-00 [test_mdtssh.sh] test (3/4) completed. Result: pass
+Oct17-23-48-05 [test_mdtssh.sh] test (4/4) started......
+
+Operation success!
+
+Oct17-23-48-23 [test_mdtssh.sh] test (4/4) completed. Result: pass
+Oct17-23-48-28 [test_mdtssh.sh] Summary: Total tests executed: 4, Passed: 4, Failed: 0

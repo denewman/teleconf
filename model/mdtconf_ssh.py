@@ -4,10 +4,15 @@ Version: 1.1
 Change history:
 	v1.0	2016-09-27	AA	Created first version
 	v1.1	2016-09-28	YS	Support multiple sensors
+	v1.2	2016-10-10	AA	Added deletion function
+	v1.3	2016-10-18	YS	Imported SSHException class
+	v1.4	2016-10-18	YS	Modifed the deleteMDT function so it 
+							can remove all MDT cofiguration instead
+							of its own
 '''
 
 from netmiko import ConnectHandler
-from netmiko.ssh_exception import NetMikoTimeoutException, NetMikoAuthenticationException
+from netmiko.ssh_exception import NetMikoTimeoutException, NetMikoAuthenticationException,SSHException
 import sys
 
 
@@ -122,7 +127,7 @@ class MdtSSHconf(object):
 			'commit' ]
 
 			output = xr.send_config_set(create_subscription)
-			#    print(output)
+			# print(output)
 
 
 			#    output = xr.send_command('show running-config telemetry model-driven')
@@ -141,7 +146,14 @@ class MdtSSHconf(object):
 
 		returncode = 0
 		xr,returncode = self.access_router()
-
+		create_destination_group = [ 'telemetry model-driven',
+			'destination-group ' + self.DgroupName,
+			'address family '+ self.AddFamily +" "+ self.DestIp +' port ' + self.RmtPort,
+			'encoding self-describing-gpb',
+			'protocol tcp',
+			'commit' ]
+		output = xr.send_config_set(create_destination_group)
+		'''
 		try:
 
 			create_destination_group = [ 'telemetry model-driven',
@@ -159,7 +171,8 @@ class MdtSSHconf(object):
 
 		except:
 			returncode = 4
-
+		'''
+		
 		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
 
@@ -284,7 +297,7 @@ class MdtSSHconf(object):
 		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
 
-	def deleteMDTconfig(self):
+	def deleteOwnMDTconfig(self):
 
 		returncode = 0
 		xr,returncode = self.access_router()
@@ -300,11 +313,31 @@ class MdtSSHconf(object):
 			output = xr.send_config_set(delete_mdt)
 			#    print(output)
 
+		except:
+			returncode = 4
 
+		print "\n"+self.OUTPUT.get(returncode)+"\n"
+		return returncode
+		
+	def deleteMDTconfig(self):
+		'''
+		Remove all MDT configuration from the router
+		'''
+		returncode = 0
+		xr,returncode = self.access_router()
 
+		try:
+
+			delete_mdt = [ 'no telemetry model-driven',
+			'commit' ]
+
+			output = xr.send_config_set(delete_mdt)
+			#    print(output)
 
 		except:
 			returncode = 4
 
 		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
+		
+		
