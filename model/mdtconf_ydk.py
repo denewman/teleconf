@@ -14,6 +14,7 @@ Change history:
 	v2.0	2016-10-14	YS	Use cisco XR native schema to configure
 							encoding and protocol within destination 
 							group
+	v2.1	2016-10-17	YS	Fix the issue of missing dgroup id in subscription
 '''
 from ydk.providers import NetconfServiceProvider
 from ydk.services import CRUDService 
@@ -125,9 +126,13 @@ class Mdtconf(object):
 			new_sgroup.config.sample_interval = long(self.Interval)
 
 			sub.sensor_profiles.sensor_profile.append(new_sgroup)
-	
-			rpc_service.create(xr, sub)
 			
+			sub.destination_groups = sub.DestinationGroups()
+			new_dgroup = sub.DestinationGroups.DestinationGroup()
+			new_dgroup.group_id = self.DgroupName
+			new_dgroup.config.group_id = self.DgroupName
+			sub.destination_groups.destination_group.append(new_dgroup)
+			rpc_service.create(xr, sub)
 			
 			dgroup = xr_telemetry.TelemetryModelDriven.DestinationGroups.DestinationGroup()
 			dgroup.destination_id = self.DgroupName
@@ -147,6 +152,7 @@ class Mdtconf(object):
 			
 			dgroup.destinations.destination.append(new_destination)
 			rpc_service.create(xr, dgroup)
+			
 			
 
 		except:

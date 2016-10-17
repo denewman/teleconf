@@ -39,13 +39,17 @@ USRNAME=""
 PASSWD=""
 ADDFAMILY=""
 DESTGNAME=""
-DESTGFREIX=""
+DESTGPREFIX=""
 SENSORPREFIX=""
+SUBSCIPTPREFIX=""
 DETINATIONLST=""
 DENCODER=""
 DPROTOCOL=""
 RMTPORT=""
 LOG=""
+PYTHON=""
+POLLINGINTERVAL=""
+SUBID=""
 
 function throwerror
 {
@@ -108,6 +112,18 @@ function throwerror
 	;;
 	19)
 	 MESSAGE="Error $errorcode: unable to clean old configurations"
+	;;
+	20)
+	 MESSAGE="Error $errorcode: missing python path"
+	;;
+	21)
+	 MESSAGE="Error $errorcode: missing subscription prefix"
+	;;
+	22)
+	 MESSAGE="Error $errorcode: missing telemetry polling interval"
+	;;
+	23)
+	 MESSAGE="Error $errorcode: missing start subscription id"
 	;;
 	esac
 	
@@ -201,9 +217,9 @@ function getvalues
 	fi
 	
 	##find prefix of destination group##
-	KEYWD="DESTGFREIX"
-	DESTGFREIX=`$GREP $KEYWD $TESTPROFILE | $HEAD -1 | $AWK '{print $NF}'`
-	if [ ! -n "$DESTGFREIX" ] 
+	KEYWD="DESTGPREFIX"
+	DESTGPREFIX=`$GREP $KEYWD $TESTPROFILE | $HEAD -1 | $AWK '{print $NF}'`
+	if [ ! -n "$DESTGPREFIX" ] 
 	  then
 	    returncode=10
 		throwerror $returncode
@@ -272,6 +288,42 @@ function getvalues
 		throwerror $returncode
 	fi
 	
+	##find python path##
+	KEYWD="PYTHON"
+	PYTHON=`$GREP $KEYWD $TESTPROFILE | $HEAD -1 | $AWK '{print $NF}'`
+	if [ ! -n "$PYTHON" -o ! -f $PYTHON ] 
+	  then
+	    returncode=20
+		throwerror $returncode
+	fi
+	
+	##find prefix for subscription ##
+	KEYWD="SUBSCIPTPREFIX"
+	SUBSCIPTPREFIX=`$GREP $KEYWD $TESTPROFILE | $HEAD -1 | $AWK '{print $NF}'`
+	if [ ! -n "$SUBSCIPTPREFIX" ] 
+	  then
+	    returncode=21
+		throwerror $returncode
+	fi
+	
+	##find polling interval for telemetry ##
+	KEYWD="POLLINGINTERVAL"
+	POLLINGINTERVAL=`$GREP $KEYWD $TESTPROFILE | $HEAD -1 | $AWK '{print $NF}'`
+	if [ ! -n "$POLLINGINTERVAL" ] 
+	  then
+	    returncode=22
+		throwerror $returncode
+	fi
+	
+	##find start subsciption id ##
+	KEYWD="SUBID"
+	SUBID=`$GREP $KEYWD $TESTPROFILE | $HEAD -1 | $AWK '{print $NF}'`
+	if [ ! -n "$SUBID" ] 
+	  then
+	    returncode=23
+		throwerror $returncode
+	fi
+	
 	return $returncode
 }
 
@@ -302,16 +354,51 @@ fi
 i=0
 
 ##remove the original configurations##
+testreulst="NA"
 timestamp=`$DATE '+%b%e %T' | $AWK -F '[: ]' '{print $1"-"$2"-"$3"-"$4}'`
-echo "$timestamp removing old configure on $ROUTERIP......" | $TEE -a $LOG
-
-
-while [[ $i < $TESTNUMBER ]]
+echo "$timestamp removing old configure on $ROUTERIP started......" | $TEE -a $LOG
+$PYTHON $MAINPGORAM delete $ROUTERIP $USRNAME $PASSWD $ACCESSPORT ssh $DESTGPREFIX \
+$ADDFAMILY $DETINATIONLST $RMTPORT $SENSORPREFIX $MDTSINGLEPATH $SUBSCIPTPREFIX \
+$SUBID $POLLINGINTERVAL > $TMPLOG
+timestamp=`$DATE '+%b%e %T' | $AWK -F '[: ]' '{print $1"-"$2"-"$3"-"$4}'`
+if grep "Operation success" $TMPLOG 2>&1 > /dev/null
+  then
+    testresult="sucess!"
+  else
+	testresult="fail!"
+fi
+cat $TMPLOG >> $LOG
+echo "$timestamp removing old configure on $ROUTERIP: $testresult" | $TEE -a $LOG
+while [ $i -lt $TESTNUMBER ]
  do
+  cat /dev/null > $TMPLOG
   testresult="NA"
   timestamp=`$DATE '+%b%e %T' | $AWK -F '[: ]' '{print $1"-"$2"-"$3"-"$4}'`
   i=`expr $i + 1`
   echo "$timestamp test ($i/$TESTNUMBER) started......" | $TEE -a $LOG
+  DGROUPNAME="$DESTGPREFIX.$i"
+  SENSORGROUPNAME="$SENSORPREFIX.$i"
+  if [[ $((i%2)) == 1 ]]
+	then
+	  SENSORPATH=$MDTSINGLEPATH
+	else
+	  SENSORPATH=$MDTMULTIPATH
+  fi
+  
+  SUBID=`expr $SUBID + 1`
+  
+  $PYTHON $MAINPGORAM push $ROUTERIP $USRNAME $PASSWD $ACCESSPORT ssh $DESTGPREFIX \
+$ADDFAMILY $DETINATIONLST $RMTPORT $SENSORGROUPNAME $SENSORPATH $SUBSCIPTPREFIX \
+$SUBID $POLLINGINTERVAL > $TMPLOG
+  if grep "Operation success" $TMPLOG 2>&1 > /dev/null
+    then
+      testresult="pass"
+	  goodcount=`expr $goodcount + 1`
+    else
+	  testresult="fail"
+	  badcount=`expr $badcount + 1`
+  fi 
+  cat $TMPLOG >> $LOG
   timestamp=`$DATE '+%b%e %T' | $AWK -F '[: ]' '{print $1"-"$2"-"$3"-"$4}'`
   echo "$timestamp test ($i/$TESTNUMBER) completed. Result: $testresult" | $TEE -a $LOG
   $SLEEP $INTERVAL  

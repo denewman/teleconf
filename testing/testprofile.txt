@@ -12,10 +12,13 @@ MDT_NET ../model/call_netconfYang.py
 PDT ../model/call_pdtconf.py
 
 ##number of testing##
-TESTNUMBER	5
+TESTNUMBER	10
 
 ##interval between each testing (in seconds)##
-INTERVAL	2
+INTERVAL	5
+
+##polling interval for telemetry (in ms)##
+POLLINGINTERVAL	30000
 
 ##single sensor path for MDT API testing##
 MDTSINGLEPATH	Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
@@ -39,14 +42,13 @@ USRNAME	rmitproject
 PASSWD	r@mot@supp@rt
 
 ##prefix of destination group name##
-DESTGFREIX dgroup
+DESTGPREFIX dgroup
 
 ##prefix of sensor name##
 SENSORPREFIX	sensortest
 
 ##ip address of destination group ##
-##if more than one ip address, use commoa (,) to seperate them##
-DETINATIONLST	172.32.1.1,172.32.1.2
+DETINATIONLST	172.32.1.1
 
 ##encoding of destination group ##
 DENCODER self-describing-gpb
@@ -60,6 +62,12 @@ RMTPORT	5432
 
 ##address family##
 ADDFAMILY	ipv4
+
+##prefix for subscription##
+SUBSCIPTPREFIX	subtest
+
+##starting subscription id##
+SUBID	100
 
 ##full path of testing log file##
 LOG	./testlog
