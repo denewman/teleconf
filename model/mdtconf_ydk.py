@@ -15,12 +15,12 @@ Change history:
 							encoding and protocol within destination 
 							group
 	v2.1	2016-10-17	YS	Fix the issue of missing dgroup id in subscription
+	v2.2	2016-10-17	YS	Added configuraton verificaton function for sensor group
 '''
 from ydk.providers import NetconfServiceProvider
 from ydk.services import CRUDService 
 import ydk.models.openconfig.openconfig_telemetry as oc_telemetry 
 import ydk.models.cisco_ios_xr.Cisco_IOS_XR_telemetry_model_driven_cfg as xr_telemetry
-from ydk.services import CRUDService
 from ncclient.transport.errors import AuthenticationError,SSHError
 
 class Mdtconf(object):
@@ -30,7 +30,9 @@ class Mdtconf(object):
 		2: 'SSH fail,could not open socket to router',
 		3: 'Unable to connect to router',
 		4: 'Configuration failed',
-		11: 'Unable to delete configuration'
+		11: 'Unable to delete configuration',
+		12: 'Unable to verify the configuratoins',
+		13: 'Unable to complete all configurations'
 		}
 	def __init__(self, RouterId,Username,Password,RouterPort,
 		AccessProtocol,DgroupName,AddFamily,DestIp,RmtPort,SGroupName,
@@ -152,16 +154,44 @@ class Mdtconf(object):
 			
 			dgroup.destinations.destination.append(new_destination)
 			rpc_service.create(xr, dgroup)
-			
-			
-
 		except:
 			returncode = 4
+		
+		'''
+		Verty the configurations
+		'''
+		returncode = self.verify_conf(xr)
 		xr.close()
-	
+		
 		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
-		
+	
+	def verify_conf(self,xr):
+		returncode = 0
+		try:
+			match_sgroup = 0
+			match_dgroup = 0
+			match_sub = 0
+			rpc_service = CRUDService()
+			sgroups = rpc_service.read(xr,oc_telemetry.TelemetrySystem.SensorGroups())
+			dgroups = rpc_service.read(xr,xr_telemetry.TelemetryModelDriven.DestinationGroups())
+			subs = rpc_service.read(xr,oc_telemetry.TelemetrySystem.Subscriptions())
+			for sgroup in sgroups.sensor_group:
+				if sgroup.sensor_group_id == self.SGroupName:
+					match_path = 0
+					split = ","
+					PathList = self.SPath.split(split)
+					SList = sgroup.sensor_paths
+					for spath in SList.sensor_path:
+						if spath.path in PathList:
+							match_path += 1
+					if match_path == len(PathList):
+						match_sgroup =1
+			if match_sgroup == 0:
+				returncode = 13
+		except:
+			returncode = 12
+		return returncode
 	def del_conf(self):
 		'''
 		This function is duplicate to deleteMDTConfig()
