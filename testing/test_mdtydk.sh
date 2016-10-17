@@ -51,6 +51,27 @@ PYTHON=""
 POLLINGINTERVAL=""
 SUBID=""
 
+function usage
+{
+   echo "
+  Usage:  ./$SCRIPTNAME {-f <test profile>} 
+
+  Options:  
+
+           -f: full path of testing profile, default is ./testprofile.txt
+		   
+	   -h: print script usage
+
+  Examples:
+	   ##default mode, all test parameters are saved in file ./testprofile.txt ##
+	   ./$SCRIPTNAME
+	   
+           ##assume all the test parameters are saved in file /data/testprofile ##   
+	   ./$SCRIPTNAME -f /data/testprofile 
+   
+   "
+	
+}
 function throwerror
 {
 	errorcode=$1
@@ -338,6 +359,23 @@ function printresult
  Passed: $passedtest, Failed: $failedtest" | $TEE -a $LOG
 
 }
+
+while getopts f:h: option
+  do
+    case $option in
+    f)
+	TESTPROFILE=$OPTARG
+    ;;
+    h)
+    ;;
+    esac	
+  done
+  
+if [[ $1 == "-h" ]]
+  then
+    usage
+	exit $exitcode
+fi
 ##make sure the testing profile does exist##
 if [ ! -f $TESTPROFILE ]
   then

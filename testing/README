@@ -42,3 +42,24 @@ Oct17-11-12-36 test (10/10) started......
 Oct17-11-12-39 test (10/10) completed. Result: pass
 Oct17-11-12-44 Summary: Total tests executed: 10, Passed: 10, Failed: 0
 script completed, all details are saved in ./testlog
+
+
+Script usage: 
+the bellow usage is for test_mdtydk.sh
+
+  Usage:  ./test_mdtydk.sh {-f <test profile>}
+
+  Options:
+
+           -f: full path of testing profile, default is ./testprofile.txt
+
+           -h: print script usage
+
+  Examples:
+           ##default mode, all test parameters are saved in file ./testprofile.txt ##
+           ./test_mdtydk.sh
+
+           ##assume all the test parameters are saved in file /data/testprofile ##
+           ./test_mdtydk.sh -f /data/testprofile
+		   
+		   
