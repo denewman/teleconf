@@ -12,7 +12,7 @@ MDT_NET ../model/call_netconfYang.py
 PDT ../model/call_pdtconf.py
 
 ##number of testing##
-TESTNUMBER	4
+TESTNUMBER	10
 
 ##interval between each testing (in seconds)##
 INTERVAL	5
