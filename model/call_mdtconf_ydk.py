@@ -47,7 +47,7 @@ def main(argv):
 	if ConfigType == "push":
 		result = conf.push_conf()
 	elif ConfigType == "delete":
-		result = conf.del_conf()
+		result = conf.deleteMDTconfig()
 	
 if __name__ == '__main__':
     # Connect to the db.

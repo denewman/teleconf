@@ -6,10 +6,10 @@
 PYTHON	/usr/bin/python
 
 ##full path of the API calling program (client code)##
-MDT_SSH	../model/call_mdtconf_ssh.py
-MDT_YDK	../model/call_mdtconf_ydk.py
-MDT_NET	../model/call_netconfYang.py
-PDT	../model/call_pdtconf.py
+MDT_SSH ../model/call_mdtconf_ssh.py
+MDT_YDK ../model/call_mdtconf_ydk.py
+MDT_NET ../model/call_netconfYang.py
+PDT ../model/call_pdtconf.py
 
 ##number of testing##
 TESTNUMBER	5
@@ -46,7 +46,14 @@ SENSORPREFIX	sensortest
 
 ##ip address of destination group ##
 ##if more than one ip address, use commoa (,) to seperate them##
-DETINATIONIP	172.32.1.1,172.32.1.2
+DETINATIONLST	172.32.1.1,172.32.1.2
+
+##encoding of destination group ##
+DENCODER self-describing-gpb
+
+##protocol of destination group ##
+DPROTOCOL	tcp
+
 
 ##remote port of destination host##
 RMTPORT	5432
@@ -56,7 +63,3 @@ ADDFAMILY	ipv4
 
 ##full path of testing log file##
 LOG	./testlog
-
-
-
- 
