@@ -1,0 +1,415 @@
+Oct17-05-11-14 Summary: Total tests executed: 5, 	Passed: 0, Failed: 0
+Oct17-05-11-49 Summary: Total tests executed: 5, Passed: 0, Failed: 0
+Oct17-05-21-04 now trying to remove old configure from 64.104.255.10......
+Oct17-05-21-04 test (1/5) started......
+Oct17-05-21-04 test (1/5) completed. Result: NA
+Oct17-05-21-04 test (2/5) started......
+Oct17-05-21-04 test (2/5) completed. Result: NA
+Oct17-05-21-04 test (3/5) started......
+Oct17-05-21-04 test (3/5) completed. Result: NA
+Oct17-05-21-04 test (4/5) started......
+Oct17-05-21-04 test (4/5) completed. Result: NA
+Oct17-05-21-04 test (5/5) started......
+Oct17-05-21-04 test (5/5) completed. Result: NA
+Oct17-05-21-04 Summary: Total tests executed: 5, Passed: 0, Failed: 0
+Oct17-05-21-57 now trying to remove old configure from 64.104.255.10......
+Oct17-05-21-57 test (1/5) started......
+Oct17-05-21-57 test (1/5) completed. Result: NA
+Oct17-05-21-59 test (2/5) started......
+Oct17-05-21-59 test (2/5) completed. Result: NA
+Oct17-05-22-01 test (3/5) started......
+Oct17-05-22-01 test (3/5) completed. Result: NA
+Oct17-05-22-03 test (4/5) started......
+Oct17-05-22-03 test (4/5) completed. Result: NA
+Oct17-05-22-05 test (5/5) started......
+Oct17-05-22-05 test (5/5) completed. Result: NA
+Oct17-05-22-07 Summary: Total tests executed: 5, Passed: 0, Failed: 0
+Oct17-05-43-03 removing old configure on 64.104.255.10......
+Oct17-05-43-06 test (1/5) started......
+Oct17-05-43-06 test (1/5) completed. Result: NA
+Oct17-05-43-08 test (2/5) started......
+Oct17-05-43-08 test (2/5) completed. Result: NA
+Oct17-05-43-10 test (3/5) started......
+Oct17-05-43-10 test (3/5) completed. Result: NA
+Oct17-05-43-12 test (4/5) started......
+Oct17-05-43-12 test (4/5) completed. Result: NA
+Oct17-05-43-14 test (5/5) started......
+Oct17-05-43-14 test (5/5) completed. Result: NA
+Oct17-05-43-16 Summary: Total tests executed: 5, Passed: 0, Failed: 0
+Oct17-05-43-55 removing old configure on 64.104.255.10......
+Oct17-05-43-57 test (1/5) started......
+Oct17-05-43-57 test (1/5) completed. Result: NA
+Oct17-05-43-59 test (2/5) started......
+Oct17-05-43-59 test (2/5) completed. Result: NA
+Oct17-05-44-01 test (3/5) started......
+Oct17-05-44-01 test (3/5) completed. Result: NA
+Oct17-05-44-03 test (4/5) started......
+Oct17-05-44-03 test (4/5) completed. Result: NA
+Oct17-05-44-05 test (5/5) started......
+Oct17-05-44-05 test (5/5) completed. Result: NA
+Oct17-05-44-07 Summary: Total tests executed: 5, Passed: 0, Failed: 0
+Oct17-05-50-18 removing old configure on 64.104.255.10 started......
+
+Unable to delete configuration
+
+Oct17-05-50-20 removing old configure on 64.104.255.10 completed, Deletion unsucessful
+Oct17-05-50-20 test (1/5) started......
+Oct17-05-50-20 test (1/5) completed. Result: NA
+Oct17-05-50-22 test (2/5) started......
+Oct17-05-50-22 test (2/5) completed. Result: NA
+Oct17-05-50-24 test (3/5) started......
+Oct17-05-50-24 test (3/5) completed. Result: NA
+Oct17-05-50-26 test (4/5) started......
+Oct17-05-50-26 test (4/5) completed. Result: NA
+Oct17-05-50-28 test (5/5) started......
+Oct17-05-50-28 test (5/5) completed. Result: NA
+Oct17-05-50-30 Summary: Total tests executed: 5, Passed: 0, Failed: 0
+Oct17-05-51-36 removing old configure on 64.104.255.10 started......
+
+Unable to delete configuration
+
+Oct17-05-51-38 removing old configure on 64.104.255.10 completed: fail
+Oct17-05-51-38 test (1/5) started......
+Oct17-05-51-38 test (1/5) completed. Result: NA
+Oct17-05-51-40 test (2/5) started......
+Oct17-05-51-40 test (2/5) completed. Result: NA
+Oct17-05-51-42 test (3/5) started......
+Oct17-05-51-42 test (3/5) completed. Result: NA
+Oct17-05-51-44 test (4/5) started......
+Oct17-05-51-44 test (4/5) completed. Result: NA
+Oct17-05-51-46 test (5/5) started......
+Oct17-05-51-46 test (5/5) completed. Result: NA
+Oct17-05-51-48 Summary: Total tests executed: 5, Passed: 0, Failed: 0
+Oct17-06-10-33 removing old configure on 64.104.255.10 started......
+
+Unable to delete configuration
+
+Oct17-06-10-35 removing old configure on 64.104.255.10: fail!
+Oct17-06-10-35 test (1/5) started......
+Oct17-06-10-38 test (1/5) completed. Result: pass
+Oct17-06-10-40 test (2/5) started......
+Oct17-06-10-43 test (2/5) completed. Result: pass
+Oct17-06-10-45 test (3/5) started......
+Oct17-06-10-48 test (3/5) completed. Result: pass
+Oct17-06-10-50 test (4/5) started......
+Oct17-06-10-53 test (4/5) completed. Result: pass
+Oct17-06-10-55 test (5/5) started......
+Oct17-06-10-58 test (5/5) completed. Result: pass
+Oct17-06-11-20 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-06-11-22 removing old configure on 64.104.255.10: sucess!
+Oct17-06-11-22 test (1/5) started......
+Oct17-06-11-25 test (1/5) completed. Result: pass
+Oct17-06-11-27 test (2/5) started......
+Oct17-06-11-30 test (2/5) completed. Result: pass
+Oct17-06-11-32 test (3/5) started......
+Oct17-06-11-35 test (3/5) completed. Result: pass
+Oct17-06-11-37 test (4/5) started......
+Oct17-06-11-40 test (4/5) completed. Result: pass
+Oct17-06-11-42 test (5/5) started......
+Oct17-06-11-45 test (5/5) completed. Result: pass
+Oct17-06-11-47 Summary: Total tests executed: 5, Passed: 5, Failed: 0
+Oct17-08-16-36 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-08-16-38 removing old configure on 64.104.255.10: sucess!
+Oct17-08-16-38 test (1/5) started......
+Oct17-08-16-42 test (1/5) completed. Result: pass
+Oct17-08-16-44 test (2/5) started......
+Oct17-08-16-47 test (2/5) completed. Result: pass
+Oct17-08-16-49 test (3/5) started......
+Oct17-08-16-53 test (3/5) completed. Result: pass
+Oct17-08-16-55 test (4/5) started......
+Oct17-08-16-58 test (4/5) completed. Result: pass
+Oct17-08-17-00 test (5/5) started......
+Oct17-08-17-04 test (5/5) completed. Result: pass
+Oct17-08-17-06 Summary: Total tests executed: 5, Passed: 5, Failed: 0
+Oct17-08-18-36 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-08-18-39 removing old configure on 64.104.255.10: sucess!
+Oct17-08-18-39 test (1/10) started......
+Oct17-08-18-42 test (1/10) completed. Result: pass
+Oct17-08-18-44 test (2/10) started......
+Oct17-08-18-48 test (2/10) completed. Result: pass
+Oct17-08-18-50 Summary: Total tests executed: 2, Passed: 2, Failed: 0
+Oct17-08-21-02 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-08-21-04 removing old configure on 64.104.255.10: sucess!
+Oct17-08-21-04 test (1/10) started......
+
+Operation success!
+
+Oct17-08-21-08 test (1/10) completed. Result: pass
+Oct17-08-21-10 test (2/10) started......
+
+Operation success!
+
+Oct17-08-21-14 test (2/10) completed. Result: pass
+Oct17-08-21-16 Summary: Total tests executed: 2, Passed: 2, Failed: 0
+Oct17-08-21-41 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-08-21-43 removing old configure on 64.104.255.10: sucess!
+Oct17-08-21-43 test (1/10) started......
+
+Operation success!
+
+Oct17-08-21-47 test (1/10) completed. Result: pass
+Oct17-08-21-49 test (2/10) started......
+
+Operation success!
+
+Oct17-08-21-53 test (2/10) completed. Result: pass
+Oct17-08-21-55 test (3/10) started......
+
+Operation success!
+
+Oct17-08-21-58 test (3/10) completed. Result: pass
+Oct17-08-22-01 test (4/10) started......
+
+Operation success!
+
+Oct17-08-22-10 test (4/10) completed. Result: pass
+Oct17-08-22-12 test (5/10) started......
+
+Operation success!
+
+Oct17-08-22-16 test (5/10) completed. Result: pass
+Oct17-08-22-18 test (6/10) started......
+
+Operation success!
+
+Oct17-08-22-22 test (6/10) completed. Result: pass
+Oct17-08-22-24 test (7/10) started......
+
+Operation success!
+
+Oct17-08-22-28 test (7/10) completed. Result: pass
+Oct17-08-22-30 test (8/10) started......
+
+Operation success!
+
+Oct17-08-22-34 test (8/10) completed. Result: pass
+Oct17-08-22-36 test (9/10) started......
+
+Operation success!
+
+Oct17-08-22-40 test (9/10) completed. Result: pass
+Oct17-08-22-42 test (10/10) started......
+
+Operation success!
+
+Oct17-08-22-46 test (10/10) completed. Result: pass
+Oct17-08-22-48 Summary: Total tests executed: 10, Passed: 10, Failed: 0
+Oct17-08-23-43 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-08-23-46 removing old configure on 64.104.255.10: sucess!
+Oct17-08-23-46 test (1/10) started......
+
+Operation success!
+
+Oct17-08-23-50 test (1/10) completed. Result: pass
+Oct17-08-23-55 test (2/10) started......
+
+Operation success!
+
+Oct17-08-23-58 test (2/10) completed. Result: pass
+Oct17-08-24-03 test (3/10) started......
+
+Operation success!
+
+Oct17-08-24-07 test (3/10) completed. Result: pass
+Oct17-08-24-12 test (4/10) started......
+
+Operation success!
+
+Oct17-08-24-16 test (4/10) completed. Result: pass
+Oct17-08-24-21 test (5/10) started......
+
+Operation success!
+
+Oct17-08-24-25 test (5/10) completed. Result: pass
+Oct17-08-24-30 test (6/10) started......
+
+Operation success!
+
+Oct17-08-24-34 test (6/10) completed. Result: pass
+Oct17-08-24-39 test (7/10) started......
+
+Operation success!
+
+Oct17-08-24-42 test (7/10) completed. Result: pass
+Oct17-08-24-47 test (8/10) started......
+
+Operation success!
+
+Oct17-08-24-51 test (8/10) completed. Result: pass
+Oct17-08-24-56 test (9/10) started......
+
+Operation success!
+
+Oct17-08-25-00 test (9/10) completed. Result: pass
+Oct17-08-25-05 test (10/10) started......
+
+Operation success!
+
+Oct17-08-25-12 test (10/10) completed. Result: pass
+Oct17-08-25-17 Summary: Total tests executed: 10, Passed: 10, Failed: 0
+Oct17-08-26-16 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-08-26-18 removing old configure on 64.104.255.10: sucess!
+Oct17-08-26-18 test (1/6) started......
+
+Operation success!
+
+Oct17-08-26-22 test (1/6) completed. Result: pass
+Oct17-08-26-27 test (2/6) started......
+
+Operation success!
+
+Oct17-08-26-31 test (2/6) completed. Result: pass
+Oct17-08-26-36 test (3/6) started......
+
+Operation success!
+
+Oct17-08-26-40 test (3/6) completed. Result: pass
+Oct17-08-26-45 test (4/6) started......
+
+Operation success!
+
+Oct17-08-26-49 test (4/6) completed. Result: pass
+Oct17-08-26-54 test (5/6) started......
+
+Operation success!
+
+Oct17-08-26-58 test (5/6) completed. Result: pass
+Oct17-08-27-03 test (6/6) started......
+
+Operation success!
+
+Oct17-08-27-07 test (6/6) completed. Result: pass
+Oct17-08-27-12 Summary: Total tests executed: 6, Passed: 6, Failed: 0
+Oct17-08-28-00 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-08-28-02 removing old configure on 64.104.255.10: sucess!
+Oct17-08-28-02 test (1/10) started......
+
+Operation success!
+
+Oct17-08-28-06 test (1/10) completed. Result: pass
+Oct17-08-28-11 test (2/10) started......
+
+Operation success!
+
+Oct17-08-28-15 test (2/10) completed. Result: pass
+Oct17-08-28-20 test (3/10) started......
+
+Operation success!
+
+Oct17-08-28-24 test (3/10) completed. Result: pass
+Oct17-08-28-29 test (4/10) started......
+
+Operation success!
+
+Oct17-08-28-32 test (4/10) completed. Result: pass
+Oct17-08-28-37 test (5/10) started......
+
+Operation success!
+
+Oct17-08-28-41 test (5/10) completed. Result: pass
+Oct17-08-28-46 test (6/10) started......
+
+Operation success!
+
+Oct17-08-28-51 test (6/10) completed. Result: pass
+Oct17-08-28-56 test (7/10) started......
+
+Operation success!
+
+Oct17-08-29-00 test (7/10) completed. Result: pass
+Oct17-08-29-05 test (8/10) started......
+
+Operation success!
+
+Oct17-08-29-09 test (8/10) completed. Result: pass
+Oct17-08-29-14 test (9/10) started......
+
+Operation success!
+
+Oct17-08-29-17 test (9/10) completed. Result: pass
+Oct17-08-29-22 test (10/10) started......
+
+Operation success!
+
+Oct17-08-29-29 test (10/10) completed. Result: pass
+Oct17-08-29-34 Summary: Total tests executed: 10, Passed: 10, Failed: 0
+Oct17-09-49-28 removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct17-09-49-31 removing old configure on 64.104.255.10: sucess!
+Oct17-09-49-31 test (1/10) started......
+
+Operation success!
+
+Oct17-09-49-34 test (1/10) completed. Result: pass
+Oct17-09-49-40 test (2/10) started......
+
+Operation success!
+
+Oct17-09-49-43 test (2/10) completed. Result: pass
+Oct17-09-49-48 test (3/10) started......
+
+Operation success!
+
+Oct17-09-49-52 test (3/10) completed. Result: pass
+Oct17-09-49-57 test (4/10) started......
+
+Operation success!
+
+Oct17-09-50-01 test (4/10) completed. Result: pass
+Oct17-09-50-06 test (5/10) started......
+
+Operation success!
+
+Oct17-09-50-10 test (5/10) completed. Result: pass
+Oct17-09-50-15 test (6/10) started......
+
+Operation success!
+
+Oct17-09-50-19 test (6/10) completed. Result: pass
+Oct17-09-50-24 test (7/10) started......
+
+Operation success!
+
+Oct17-09-50-28 test (7/10) completed. Result: pass
+Oct17-09-50-33 test (8/10) started......
+
+Operation success!
+
+Oct17-09-50-46 test (8/10) completed. Result: pass
+Oct17-09-50-51 test (9/10) started......
+
+Operation success!
+
+Oct17-09-50-54 test (9/10) completed. Result: pass
+Oct17-09-51-00 test (10/10) started......
+
+Operation success!
+
+Oct17-09-51-03 test (10/10) completed. Result: pass
+Oct17-09-51-08 Summary: Total tests executed: 10, Passed: 10, Failed: 0

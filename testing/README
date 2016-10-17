@@ -1,0 +1,44 @@
+##Testing script for APIs##
+
+Files:
+	testprofile.txt:	Profile file contains all testing parameters
+	test_mdtydk.sh:		script for testing MDT YDK API
+	
+How to run the testing script:
+
+1, Go to testing directory teleconf/testing
+
+2, Modify ./testprofile.txt to adjust the testing parameters
+
+3, Run the bellow commands
+
+	##to test MDT YDK API ##
+	sudo /bin/bash ./test_mdtydk.sh 
+	
+4, Sample output:
+
+cloud-user@rmitccs:~/teleconf/testing$ sudo /bin/bash  ./test_mdtydk.sh
+Oct17-11-11-13 removing old configure on 64.104.255.10 started......
+Oct17-11-11-15 removing old configure on 64.104.255.10: sucess!
+Oct17-11-11-15 test (1/10) started......
+Oct17-11-11-19 test (1/10) completed. Result: pass
+Oct17-11-11-24 test (2/10) started......
+Oct17-11-11-27 test (2/10) completed. Result: pass
+Oct17-11-11-32 test (3/10) started......
+Oct17-11-11-36 test (3/10) completed. Result: pass
+Oct17-11-11-41 test (4/10) started......
+Oct17-11-11-45 test (4/10) completed. Result: pass
+Oct17-11-11-50 test (5/10) started......
+Oct17-11-11-53 test (5/10) completed. Result: pass
+Oct17-11-11-58 test (6/10) started......
+Oct17-11-12-02 test (6/10) completed. Result: pass
+Oct17-11-12-07 test (7/10) started......
+Oct17-11-12-13 test (7/10) completed. Result: pass
+Oct17-11-12-18 test (8/10) started......
+Oct17-11-12-22 test (8/10) completed. Result: pass
+Oct17-11-12-27 test (9/10) started......
+Oct17-11-12-31 test (9/10) completed. Result: pass
+Oct17-11-12-36 test (10/10) started......
+Oct17-11-12-39 test (10/10) completed. Result: pass
+Oct17-11-12-44 Summary: Total tests executed: 10, Passed: 10, Failed: 0
+script completed, all details are saved in ./testlog
