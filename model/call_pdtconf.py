@@ -157,7 +157,9 @@ def main(argv):
 	if ConfType == "push":
 		result = conf.push_conf()
 	
-	
+	if ConfType == "deletePDT":
+		result = conf.deletePDTconfig()
+		
 if __name__ == '__main__':
     # Connect to the db.
 	main(sys.argv[1:])

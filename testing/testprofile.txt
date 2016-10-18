@@ -9,7 +9,7 @@ PYTHON	/usr/bin/python
 MDT_SSH ../model/call_mdtconf_ssh.py
 MDT_YDK ../model/call_mdtconf_ydk.py
 MDT_NET ../model/call_netconfYang.py
-PDT ../model/call_pdtconf.py
+PDT_SSH ../model/call_pdtconf.py
 
 ##number of testing##
 TESTNUMBER	2
@@ -56,7 +56,6 @@ DENCODER self-describing-gpb
 ##protocol of destination group ##
 DPROTOCOL	tcp
 
-
 ##remote port of destination host##
 RMTPORT	5432
 
@@ -68,6 +67,37 @@ SUBSCIPTPREFIX	subtest
 
 ##starting subscription id##
 SUBID	100
+
+###PDT parameters###
+##single sensor path for PDT API##
+PDTSINGLEPATH	RootOper.InfraStatistics.Interface(*).Latest.GenericCounters
+
+##multi sensor path for PDT API##
+PDTMULTIPATH	RootOper.InfraStatistics.Interface(*).Latest.GenericCounters,pdttestpath
+
+##policy prefix for PDT, it is used for policy name##
+POLICYPREFIX	testpolicy
+
+##policy group prefix for PDT, it is used for policy group name##
+POLICYGROUPPREFIX	testgroup
+
+##policy version for PDT##
+POLICYVERSION	1
+
+##polling period for PDT##
+POLICYPOLLINTERVAL	30
+
+##destination ip for PDT##
+POLICYDSTIP	172.32.1.1
+
+##comment for PDT##
+PDTCOMMENT	test_comment_only
+
+##identifier for PDT##
+PDTIDENT	pdt_test_id
+
+##description for PDT##
+PDTDES	pdt_test_description
 
 ##full path of testing log file##
 LOG	./testlog

@@ -4,6 +4,8 @@ Version: 1.0
 Change history:
 	v1.0	2016-09-09	YS	Created first version
 	v1.1	2016-10-10	YS	Added deletion function
+	v1.2	2016-10-18	YS	Changed PDT configure command to
+							make it work on XR IOS 6.2.1.15I
 '''
 
 import json
@@ -212,7 +214,7 @@ class Pdtconf(object):
 				sys.stdout.flush()
 				time.sleep(3)
 				channel2.send('conf t\r\n')
-				channel2.send('telemetry\r\n')
+				channel2.send('telemetry policy-driven\r\n')
 				channel2.send('encoder json\r\n')
 				cmd = "policy group "+self.PolicyGroupName+"\r\n"
 				channel2.send(cmd)
