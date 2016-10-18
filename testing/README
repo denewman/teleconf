@@ -5,6 +5,7 @@ Files:
 	test_mdtydk.sh:		script for testing MDT YDK API
 	test_mdtssh.sh:		script for testing MDT SSH API
 	test_mdtnetconfYang.sh:	script for testing MDT Netconf/Yang API
+	test_pdt.sh:		script for testing PDT API
 	
 How to run the testing script:
 
