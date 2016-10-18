@@ -254,7 +254,7 @@ class Pdtconf(object):
 				sys.stdout.flush()
 				time.sleep(3)
 				channel2.send('conf t\r\n')
-				channel2.send('telemetry\r\n')
+				channel2.send('telemetry policy-driven\r\n')
 				channel2.send('encoder json\r\n')
 				cmd = "no policy group "+self.PolicyGroupName+"\r\n"
 				channel2.send(cmd)
@@ -285,7 +285,7 @@ class Pdtconf(object):
 				sys.stdout.flush()
 				time.sleep(3)
 				channel2.send('conf t\r\n')
-				channel2.send('no telemetry encoder json\r\n')
+				channel2.send('no telemetry policy-driven\r\n')
 				channel2.send('commit\r\n')
 				time.sleep(2)
 				channel2.close				
