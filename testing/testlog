@@ -709,3 +709,72 @@ Operation success!
 
 Oct17-23-48-23 [test_mdtssh.sh] test (4/4) completed. Result: pass
 Oct17-23-48-28 [test_mdtssh.sh] Summary: Total tests executed: 4, Passed: 4, Failed: 0
+Oct18-00-20-10 [test_mdtnetconfYang.sh] removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct18-00-20-12 [test_mdtnetconfYang.sh] removing old configure on 64.104.255.10: sucess!
+Oct18-00-20-12 [test_mdtnetconfYang.sh] test (1/10) started......
+
+Operation success!
+
+Oct18-00-20-15 [test_mdtnetconfYang.sh] test (1/10) completed. Result: pass
+Oct18-00-20-20 [test_mdtnetconfYang.sh] test (2/10) started......
+Oct18-00-20-20 [test_mdtnetconfYang.sh] test (2/10) completed. Result: fail
+Oct18-00-20-25 [test_mdtnetconfYang.sh] test (3/10) started......
+
+Operation success!
+
+Oct18-00-20-27 [test_mdtnetconfYang.sh] test (3/10) completed. Result: pass
+Oct18-00-20-33 [test_mdtnetconfYang.sh] test (4/10) started......
+
+Operation success!
+
+Oct18-00-20-35 [test_mdtnetconfYang.sh] test (4/10) completed. Result: pass
+Oct18-00-20-40 [test_mdtnetconfYang.sh] test (5/10) started......
+
+Operation success!
+
+Oct18-00-20-42 [test_mdtnetconfYang.sh] test (5/10) completed. Result: pass
+Oct18-00-20-47 [test_mdtnetconfYang.sh] test (6/10) started......
+
+Operation success!
+
+Oct18-00-20-49 [test_mdtnetconfYang.sh] test (6/10) completed. Result: pass
+Oct18-00-20-54 [test_mdtnetconfYang.sh] test (7/10) started......
+
+Operation success!
+
+Oct18-00-20-57 [test_mdtnetconfYang.sh] test (7/10) completed. Result: pass
+Oct18-00-21-02 [test_mdtnetconfYang.sh] test (8/10) started......
+
+Operation success!
+
+Oct18-00-21-04 [test_mdtnetconfYang.sh] test (8/10) completed. Result: pass
+Oct18-00-21-09 [test_mdtnetconfYang.sh] test (9/10) started......
+
+Operation success!
+
+Oct18-00-21-11 [test_mdtnetconfYang.sh] test (9/10) completed. Result: pass
+Oct18-00-21-16 [test_mdtnetconfYang.sh] test (10/10) started......
+
+Operation success!
+
+Oct18-00-21-18 [test_mdtnetconfYang.sh] test (10/10) completed. Result: pass
+Oct18-00-21-23 [test_mdtnetconfYang.sh] Summary: Total tests executed: 10, Passed: 9, Failed: 1
+Oct18-00-23-20 [test_mdtnetconfYang.sh] removing old configure on 64.104.255.10 started......
+
+Operation success!
+
+Oct18-00-23-22 [test_mdtnetconfYang.sh] removing old configure on 64.104.255.10: sucess!
+Oct18-00-23-23 [test_mdtnetconfYang.sh] test (1/2) started......
+
+Operation success!
+
+Oct18-00-23-25 [test_mdtnetconfYang.sh] test (1/2) completed. Result: pass
+Oct18-00-23-30 [test_mdtnetconfYang.sh] test (2/2) started......
+
+Operation success!
+
+Oct18-00-23-32 [test_mdtnetconfYang.sh] test (2/2) completed. Result: pass
+Oct18-00-23-37 [test_mdtnetconfYang.sh] Summary: Total tests executed: 2, Passed: 2, Failed: 0
