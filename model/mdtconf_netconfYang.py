@@ -4,9 +4,9 @@ using ncclient
 Version: 1.0
 Change history:
 	v1.0	2016-10-13	AA	Implemeted Netconf/Yang telemetry API
-	v1.1	2016-10-14	YS	Within configureAll function, changed 
-							destianation group ip address from 
-							172.16.15.14 to the input valriable 
+	v1.1	2016-10-14	YS	Within configureAll function, changed
+							destianation group ip address from
+							172.16.15.14 to the input valriable
 							self.DestIp
 							changed protcol from "grpc" to "tcp"
 '''
@@ -95,7 +95,7 @@ class MdtNetconfYang(object):
 
 		returncode = 0
 		xr , returncode = self.access_router()
-		
+
 		try:
 			edit_data = '''
 			<config>
@@ -390,10 +390,11 @@ class MdtNetconfYang(object):
 		returncode = 0
 		xr , returncode = self.access_router()
 
+		# last edit <telemetry-model-driven  nc:operation="remove"
 		try:
 			edit_data = '''
 		      <config>
-			    <telemetry-model-driven xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-cfg">
+			    <telemetry-model-driven  nc:operation="remove" xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-cfg">
 				   <destination-groups>
 				    <destination-group nc:operation="remove">
 				     <destination-id>'''+self.DgroupName+'''</destination-id>
@@ -451,3 +452,76 @@ class MdtNetconfYang(object):
 
 		print "\n"+self.OUTPUT.get(returncode)+"\n"
 		return returncode
+
+
+
+
+# this delete funtion can be uesed to delete only spicified sensor group , destination group and subscription group
+# change funtion name
+
+# def delete(self):
+#
+# 	returncode = 0
+# 	xr , returncode = self.access_router()
+#
+# 	try:
+# 		edit_data = '''
+# 		  <config>
+# 			<telemetry-model-driven xmlns="http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-cfg">
+# 			   <destination-groups>
+# 				<destination-group nc:operation="remove">
+# 				 <destination-id>'''+self.DgroupName+'''</destination-id>
+# 				 <destinations>
+# 				  <destination>
+# 				   <address-family>'''+self.AddFamily+'''</address-family>
+# 				   <'''+self.AddFamily+'''>
+# 					<'''+self.AddFamily+'''-address>172.16.15.14</'''+self.AddFamily+'''-address>
+# 					<destination-port>'''+self.RmtPort+'''</destination-port>
+# 					<encoding>self-describing-gpb</encoding>
+# 					<protocol>
+# 					 <protocol>grpc</protocol>
+# 					 <tls-hostname></tls-hostname>
+# 					 <no-tls>0</no-tls>
+# 					</protocol>
+# 				   </'''+self.AddFamily+'''>
+# 				  </destination>
+# 				 </destinations>
+# 				</destination-group>
+# 			   </destination-groups>
+# 			   <sensor-groups>
+# 				<sensor-group nc:operation="remove">
+# 				 <sensor-group-identifier>'''+self.SGroupName+'''</sensor-group-identifier>
+# 				 <sensor-paths>
+# 				  <sensor-path>
+# 				   <telemetry-sensor-path>'''+self.SPath+'''</telemetry-sensor-path>
+# 				  </sensor-path>
+# 				 </sensor-paths>
+# 				</sensor-group>
+# 			   </sensor-groups>
+# 			   <subscriptions>
+# 				<subscription nc:operation="remove">
+# 				 <subscription-identifier>'''+self.SubName +self.SubId+'''</subscription-identifier>
+# 				 <sensor-profiles>
+# 				  <sensor-profile>
+# 				   <sensorgroupid>'''+self.SGroupName+'''</sensorgroupid>
+# 				   <sample-interval>'''+self.Interval+'''</sample-interval>
+# 				  </sensor-profile>
+# 				 </sensor-profiles>
+# 				 <destination-profiles>
+# 				  <destination-profile>
+# 				   <destination-id>'''+self.DgroupName+'''</destination-id>
+# 				   <enable></enable>
+# 				  </destination-profile>
+# 				 </destination-profiles>
+# 				</subscription>
+# 			   </subscriptions>
+# 			  </telemetry-model-driven>
+# 		  </config>
+# 		  '''
+# 		xr.edit_config(edit_data, target='candidate', format='xml')
+# 		xr.commit()
+# 	except:
+# 		returncode = 4
+#
+# 	print "\n"+self.OUTPUT.get(returncode)+"\n"
+# 	return returncode
